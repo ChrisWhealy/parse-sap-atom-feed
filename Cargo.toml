@@ -1,6 +1,6 @@
 [package]
 name = "parse-sap-atom-feed"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Chris Whealy <chris@lighthouse.no>"]
 edition = "2021"
 description = "Parse an SAP OData V2 XML atom:Feed"
@@ -11,9 +11,7 @@ license = "MIT"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-regex = "1.9"
-serde = { version = "1.0", features = ["derive"] }
-
-[dev-dependencies]
 # Versions of quick-xml from 0.27.0 upwards break with error Custom("missing field `Name`")
 quick-xml = { version = "0.26", features = ["serialize"] }
+regex = "1.9"
+serde = { version = "1.0", features = ["derive"] }
