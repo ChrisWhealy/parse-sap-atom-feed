@@ -2,6 +2,8 @@ use regex::Regex;
 use serde::{Deserialize, Deserializer};
 use std::str::FromStr;
 
+pub static XML_DECLARATION: &[u8] = "<?xml version=\"1.0\" encoding=\"utf-8\"?>".as_bytes();
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // XML Defaults
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
