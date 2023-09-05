@@ -1,4 +1,6 @@
 use regex::Regex;
+use serde::{Deserialize, Deserializer};
+use std::str::FromStr;
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // XML Defaults
@@ -32,6 +34,16 @@ pub fn default_xml_namespace_oasis() -> String {
 }
 pub fn default_xml_namespace_sap() -> String {
     "http://www.sap.com/Protocols/SAPData".to_string()
+}
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+/// Deserialize string to Boolean
+pub fn de_str_to_bool<'de, D>(deserializer: D) -> Result<bool, D::Error>
+where
+    D: Deserializer<'de>,
+{
+    let s = String::deserialize(deserializer)?;
+    bool::from_str(&s).or_else(|_| Ok(false))
 }
 
 /// # CORRECT FORMATTING ERRORS IN RAW XML

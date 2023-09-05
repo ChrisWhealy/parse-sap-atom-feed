@@ -12,7 +12,7 @@ This crate `parse-sap-atom-feed` then makes use of the `struct`s and `enum`s gen
 
 You want to develop a Rust application that can consume the entity set data exposed by an SAP OData V2 service.
 
-For the purposes of instruction, let's say you're working with a custom OData service that displays services order either by functional location or by date:
+For the purposes of instruction, let's say you're working with a custom OData service that displays services ordered either by functional location or by date:
 
 | | |
 |---|---|

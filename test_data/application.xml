@@ -1,0 +1,6 @@
+<application>
+  <component_id/>
+  <service_namespace>/SAP/</service_namespace>
+  <service_id>ZCUSTOM_SRV</service_id>
+  <service_version>0001</service_version>
+</application>

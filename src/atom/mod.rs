@@ -2,6 +2,7 @@ use crate::xml::default_xml_namespace_atom;
 use serde::{Deserialize, Serialize};
 
 pub mod feed;
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 /// Represents an `<atom:link>` tag
 #[derive(Debug, Serialize, Deserialize)]

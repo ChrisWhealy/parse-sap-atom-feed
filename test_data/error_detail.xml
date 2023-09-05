@@ -1,0 +1,9 @@
+<errordetail>
+  <ContentID/>
+  <code>/IWBEP/CX_MGW_NOT_IMPL_EXC</code>
+  <message>Method 'SOME_TYPE_GET_ENTITYSET' not implemented in data provider class</message>
+  <propertyref/>
+  <severity>error</severity>
+  <target/>
+  <transition>false</transition>
+</errordetail>
