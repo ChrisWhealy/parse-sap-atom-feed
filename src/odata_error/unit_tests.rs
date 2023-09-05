@@ -5,9 +5,9 @@ use std::{
     str::FromStr,
 };
 
-use super::Error;
+use super::ODataError;
 
-impl std::str::FromStr for Error {
+impl std::str::FromStr for ODataError {
     type Err = quick_xml::DeError;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
@@ -23,7 +23,7 @@ pub fn should_parse_error() {
 
     match String::from_utf8(xml_buffer) {
         Ok(xml) => {
-            let err = Error::from_str(&xml).unwrap();
+            let err = ODataError::from_str(&xml).unwrap();
 
             assert_eq!(err.code, "/IWBEP/CM_MGW_RT/021");
             assert!(err.message.starts_with("Method 'SOME_TYPE_GET_ENTITYSET'"));

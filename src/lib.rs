@@ -1,3 +1,3 @@
 pub mod atom;
-pub mod error;
+pub mod odata_error;
 pub mod xml;

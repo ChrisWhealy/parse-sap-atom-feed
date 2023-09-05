@@ -7,7 +7,7 @@ use serde::{Deserialize, Serialize};
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 /// Represents an internal SAP OData `<error xmlns="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata">` tag
 #[derive(Debug, Serialize, Deserialize)]
-pub struct Error {
+pub struct ODataError {
     #[serde(rename = "xmlns", default = "default_xml_namespace")]
     pub xml_namespace: String,
 
