@@ -21,6 +21,14 @@ pub struct ODataError {
     pub inner_error: InnerError,
 }
 
+impl std::str::FromStr for ODataError {
+    type Err = quick_xml::DeError;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        quick_xml::de::from_str(s)
+    }
+}
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #[cfg(test)]
 pub mod unit_tests;

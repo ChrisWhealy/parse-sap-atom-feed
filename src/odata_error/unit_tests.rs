@@ -7,14 +7,6 @@ use std::{
 
 use super::ODataError;
 
-impl std::str::FromStr for ODataError {
-    type Err = quick_xml::DeError;
-
-    fn from_str(s: &str) -> Result<Self, Self::Err> {
-        quick_xml::de::from_str(s)
-    }
-}
-
 #[test]
 pub fn should_parse_error() {
     let mut xml_buffer: Vec<u8> = Vec::new();
