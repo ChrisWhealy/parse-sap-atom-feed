@@ -56,9 +56,12 @@ E.G. `https://my-sap-server.my-domain.com/sap/opu/odata/sap/ZCUSTOM_SERVICE_ORDE
    use parse_sap_atom_feed::{
        Feed,
        xml::sanitise_xml,
+       str::{self, FromStr},
    };
 
    include!(concat!(env!("OUT_DIR"), "/zcustom_service_orders.rs"));
+
+   use zcustom_service_orders::*;
 
    fn main() {
       let raw_xml: String = /* Whatever code is needed to fetch the entity set data as a raw XML string */;
