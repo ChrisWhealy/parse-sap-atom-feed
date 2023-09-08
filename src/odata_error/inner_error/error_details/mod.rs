@@ -6,7 +6,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Serialize, Deserialize)]
 pub struct ErrorDetails {
     #[serde(rename = "errordetail")]
-    pub error_detail: Vec<ErrorDetail>,
+    pub error_detail: Option<Vec<ErrorDetail>>,
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
