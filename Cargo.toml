@@ -1,11 +1,11 @@
 [package]
 name = "parse-sap-atom-feed"
-version = "0.1.5"
+version = "0.1.6"
 authors = ["Chris Whealy <chris@lighthouse.no>"]
 edition = "2021"
 description = "Parse an SAP OData V2 XML atom:Feed"
 keywords = ["odata", "sap", "atom", "parser", "opendata"]
-repository = "https://github.com/lighthouse-no/parse-sap-odata"
+repository = "https://github.com/lighthouse-no/parse-sap-atom-feed"
 license = "MIT"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
