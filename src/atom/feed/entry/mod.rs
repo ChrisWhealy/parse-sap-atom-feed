@@ -3,7 +3,7 @@ pub mod content;
 
 use crate::atom::feed::AtomLink;
 use content::Content;
-use serde::{Deserialize, Serialize};
+use serde::{de::DeserializeOwned, Deserialize, Serialize};
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 /// Represents an Atom `<entry>` of type `<T>` where `<T>` is the entity type of this particular entity set
@@ -29,4 +29,15 @@ pub struct Entry<T> {
     pub links: Vec<AtomLink>,
 
     pub content: Content<T>,
+}
+
+impl<T> std::str::FromStr for Entry<T>
+where
+    T: DeserializeOwned,
+{
+    type Err = quick_xml::DeError;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        quick_xml::de::from_str(s)
+    }
 }
