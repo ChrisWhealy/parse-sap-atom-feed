@@ -15,6 +15,7 @@ impl std::str::FromStr for Application {
     }
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #[test]
 pub fn should_parse_application() {
     let mut xml_buffer: Vec<u8> = Vec::new();

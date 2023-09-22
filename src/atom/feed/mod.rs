@@ -18,22 +18,22 @@ use serde::{de::DeserializeOwned, Deserialize, Serialize};
 /// `1:1 link`<br>
 /// `0:n entry`
 ///
-/// ***WARNING:***<br>`quick-xml` strips the namespace from XML tag names, but not attribute names!
-///
-/// Consequently, tag names such as `<m:properties>` and `<d:Address>` will appear simply as `<properties>` and
-/// `<address>` etc, but attribute names such as `xmlns:d` will appear without modification
+/// ***WARNING:***<br>`quick-xml` strips the namespace from both XML tag and attribute names!
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Feed<T> {
-    #[serde(rename = "xmlns", default = "default_xml_namespace_atom")]
+    #[serde(rename = "@xmlns", default = "default_xml_namespace_atom")]
     pub namespace: Option<String>,
 
-    #[serde(rename = "xmlns:m", default = "default_xml_namespace_m")]
+    // Appears in the XML as the `feed` attribute `xmlns:m`
+    #[serde(rename = "@m", default = "default_xml_namespace_m")]
     pub namespace_m: String,
 
-    #[serde(rename = "xmlns:d", default = "default_xml_namespace_d")]
+    // Appears in the XML as the `feed` attribute `xmlns:d`
+    #[serde(rename = "@d", default = "default_xml_namespace_d")]
     pub namespace_d: String,
 
-    #[serde(rename = "xml:base")]
+    // Appears in the XML as the `feed` attribute `xmlns:base`
+    #[serde(rename = "@base")]
     pub xml_base: Option<String>,
 
     pub id: String,

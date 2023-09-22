@@ -8,6 +8,10 @@ Crate `parse-sap-odata` is invoked by a Rust build script to parse an OData XML 
 
 This crate `parse-sap-atom-feed` then makes use of the `struct`s and `enum`s generated above and allows your business app to consume the XML returned when requesting entity sets from this OData service.
 
+## Changes in V0.2
+
+The main change in version 0.2 is to adopt `quick-xml`'s [`@`-prefixed attribute syntax](https://docs.rs/quick-xml/latest/quick_xml/de/index.html#mapping-xml-to-rust-types) introduced in `0.27` and higher.
+
 ## Example Usage
 
 You want to develop a Rust application that can consume the entity set data exposed by an SAP OData V2 service.

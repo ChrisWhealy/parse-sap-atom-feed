@@ -15,6 +15,7 @@ impl std::str::FromStr for AtomLink {
     }
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #[test]
 pub fn should_parse_atom_link() {
     let mut xml_buffer: Vec<u8> = Vec::new();
@@ -25,13 +26,18 @@ pub fn should_parse_atom_link() {
         Ok(xml) => {
             let atom_link = AtomLink::from_str(&xml).unwrap();
 
-            assert_eq!(atom_link.xml_namespace_atom, Some(String::from("http://www.w3.org/2005/Atom")));
+            assert_eq!(
+                atom_link.xml_namespace_atom,
+                Some(String::from("http://www.w3.org/2005/Atom"))
+            );
             assert_eq!(atom_link.rel, "latest-version");
             assert_eq!(
                 atom_link.href,
                 "https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwbep/GWSAMPLE_BASIC/$metadata"
             );
-        },
+            assert_eq!(atom_link.title, None);
+            assert_eq!(atom_link.mime_type, None);
+        }
         Err(err) => println!("XML test data was not in UTF8 format: {}", err),
     };
 }

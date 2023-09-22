@@ -1,5 +1,6 @@
 use crate::xml::*;
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #[test]
 fn should_correct_bad_etag_raw() {
     assert_eq!(
@@ -10,6 +11,7 @@ fn should_correct_bad_etag_raw() {
     );
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #[test]
 fn should_correct_bad_etag_encoded() {
     assert_eq!(
@@ -20,6 +22,7 @@ fn should_correct_bad_etag_encoded() {
     );
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #[test]
 fn should_replace_naked_ampersand_no_whitespace() {
     assert_eq!(
@@ -28,6 +31,7 @@ fn should_replace_naked_ampersand_no_whitespace() {
     );
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #[test]
 fn should_replace_naked_ampersand_whitespace() {
     assert_eq!(

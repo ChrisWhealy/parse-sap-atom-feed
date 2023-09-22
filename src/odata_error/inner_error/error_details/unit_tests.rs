@@ -15,6 +15,7 @@ impl std::str::FromStr for ErrorDetail {
     }
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #[test]
 pub fn should_parse_error_detail() {
     let mut xml_buffer: Vec<u8> = Vec::new();

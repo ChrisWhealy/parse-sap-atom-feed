@@ -17,7 +17,8 @@ use serde::{de::DeserializeOwned, Deserialize, Serialize};
 /// `1:1 content`<br>
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Entry<T> {
-    #[serde(rename = "m:etag")]
+    // Appears in the XML as the `entry` attribute `m:etag`
+    #[serde(rename = "@etag")]
     pub etag: Option<String>,
 
     pub id: String,

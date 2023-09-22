@@ -15,6 +15,7 @@ impl std::str::FromStr for ErrorResolution {
     }
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #[test]
 pub fn should_parse_error_resolution() {
     let mut xml_buffer: Vec<u8> = Vec::new();

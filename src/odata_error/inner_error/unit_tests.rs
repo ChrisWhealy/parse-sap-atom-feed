@@ -15,6 +15,7 @@ impl std::str::FromStr for InnerError {
     }
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #[test]
 pub fn should_parse_inner_error() {
     let mut xml_buffer: Vec<u8> = Vec::new();

@@ -7,6 +7,7 @@ use std::{
 
 use super::ODataError;
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #[test]
 pub fn should_parse_error_with_details() {
     let mut xml_buffer: Vec<u8> = Vec::new();
@@ -18,12 +19,16 @@ pub fn should_parse_error_with_details() {
             let err = ODataError::from_str(&xml).unwrap();
 
             assert_eq!(err.code, "/IWBEP/CM_MGW_RT/021");
-            assert!(err.message.starts_with("Method 'SOME_TYPE_GET_ENTITYSET'"));
+            assert_eq!(
+                err.message,
+                "Method 'SOME_TYPE_GET_ENTITYSET' not implemented in data provider class"
+            );
         }
         Err(err) => println!("XML test data was not in UTF8 format: {}", err),
     };
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #[test]
 pub fn should_parse_error_without_details() {
     let mut xml_buffer: Vec<u8> = Vec::new();
@@ -35,7 +40,10 @@ pub fn should_parse_error_without_details() {
             let err = ODataError::from_str(&xml).unwrap();
 
             assert_eq!(err.code, "/IWFND/MED/170");
-            assert!(err.message.starts_with("No service found"));
+            assert_eq!(
+                err.message,
+                "No service found for namespace '', name 'ZCUSTOM_SRV', version '0001'"
+            );
         }
         Err(err) => println!("XML test data was not in UTF8 format: {}", err),
     };
