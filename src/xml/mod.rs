@@ -1,6 +1,4 @@
 use regex::Regex;
-use serde::{Deserialize, Deserializer};
-use std::str::FromStr;
 
 pub static XML_DECLARATION: &[u8] = "<?xml version=\"1.0\" encoding=\"utf-8\"?>".as_bytes();
 
@@ -36,16 +34,6 @@ pub fn default_xml_namespace_oasis() -> String {
 }
 pub fn default_xml_namespace_sap() -> String {
     "http://www.sap.com/Protocols/SAPData".to_string()
-}
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-/// Deserialize string to Boolean
-pub fn de_str_to_bool<'de, D>(deserializer: D) -> Result<bool, D::Error>
-where
-    D: Deserializer<'de>,
-{
-    let s = String::deserialize(deserializer)?;
-    bool::from_str(&s).or_else(|_| Ok(false))
 }
 
 /// # CORRECT FORMATTING ERRORS IN RAW XML
@@ -109,9 +97,9 @@ fn sanitise_bad_etags(xml: String) -> String {
 /// Such characters must be replaced with the character encoding `&amp;`
 ///
 /// First, search for ampersands with non-whitespace characters immediately before and after,
-/// then search for ampersnad characters with a space on either side.
+/// then search for ampersand characters with a space on either side.
 ///
-/// This functionality assumes that the character string `&amp;` will not occur in the XML
+/// This functionality assumes that the character string `&amp;` does not occur in the XML
 fn sanitise_naked_ampersand(xml: String) -> String {
     let re = Regex::new(r"(\S)\&(\S)").unwrap();
     let clean_xml = re.replace_all(&xml, "$1&amp;$2");

@@ -1,4 +1,5 @@
-use crate::xml::{de_str_to_bool, default_false};
+use crate::deserializers::de_str_to_bool;
+use crate::xml::default_false;
 use serde::{Deserialize, Serialize};
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
