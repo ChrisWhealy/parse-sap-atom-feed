@@ -6,7 +6,8 @@ use serde::{
 use std::{fmt, str::FromStr};
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-/// Deserialize string to Boolean
+/// Deserialize String to Boolean
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 pub fn de_str_to_bool<'de, D>(deserializer: D) -> Result<bool, D::Error>
 where
     D: Deserializer<'de>,
@@ -16,7 +17,7 @@ where
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-/// Deserialize chrono::NaiveDateTime
+/// Deserialize Edm.DateTime to chrono::NaiveDateTime
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 struct NaiveDateTimeVisitor;
 
