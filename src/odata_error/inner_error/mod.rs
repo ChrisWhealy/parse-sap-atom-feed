@@ -11,7 +11,7 @@ use serde::{Deserialize, Serialize};
 /// Represents an internal SAP OData `<innererror>` tag
 #[derive(Debug, Serialize, Deserialize)]
 pub struct InnerError {
-    pub application: Application,
+    pub application: Option<Application>,
 
     #[serde(rename = "transactionid")]
     pub transaction_id: String,
@@ -22,7 +22,7 @@ pub struct InnerError {
     pub error_resolution: ErrorResolution,
 
     #[serde(rename = "errordetails")]
-    pub error_details: ErrorDetails,
+    pub error_details: Option<ErrorDetails>,
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
