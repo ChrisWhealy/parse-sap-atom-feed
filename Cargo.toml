@@ -1,17 +1,15 @@
 [package]
 name = "parse-sap-atom-feed"
-version = "0.2.2"
+version = "0.2.3"
 authors = ["Chris Whealy <chris@lighthouse.no>"]
 edition = "2021"
 description = "Parse an SAP OData V2 XML atom:Feed"
 keywords = ["odata", "sap", "atom", "parser", "opendata"]
-repository = "https://github.com/lighthouse-no/parse-sap-atom-feed"
+repository = "https://github.com/ChrisWhealy/parse-sap-atom-feed"
 license = "MIT"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 chrono = { version = "0.4", features = ["serde"] }
-quick-xml = { version = "0.30", features = ["serialize"] }
+quick-xml = { version = "0.31.0", features = ["serialize"] }
 regex = "1.9"
 serde = { version = "1.0", features = ["derive"] }
