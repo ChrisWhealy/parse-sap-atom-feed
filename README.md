@@ -76,3 +76,9 @@ E.G. `https://my-sap-server.my-domain.com/sap/opu/odata/sap/ZCUSTOM_SERVICE_ORDE
       let srv_orders_by_floc = Feed::<ZServiceOrder>::from_str(&clean_xml);
    }
    ```
+
+## Change Log
+
+| Version | Description
+|--:|---
+0.2.4 | Update `Cargo.toml` dependency versions
