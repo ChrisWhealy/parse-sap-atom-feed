@@ -19,6 +19,7 @@ where
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 /// Deserialize Edm.DateTime to chrono::NaiveDateTime
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#[allow(dead_code)]
 struct NaiveDateTimeVisitor;
 
 impl<'de> Visitor<'de> for NaiveDateTimeVisitor {

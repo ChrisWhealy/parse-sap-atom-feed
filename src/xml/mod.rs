@@ -41,7 +41,7 @@ pub fn default_xml_namespace_sap() -> String {
 /// When reading certain entity sets from SAP's demo OData service `GWSAMPLE_BASIC`, various formatting errors have been
 /// noticed that will cause an XML parser to throw its toys out of the pram.
 ///
-/// Whether these errors alsop occur in other SAP-delivered Odata services has not been determined; however, coding is
+/// Whether these errors also occur in other SAP-delivered OData services has not been determined; however, coding is
 /// included here to correct those errors detected so far in GWSAMPLE_BASIC
 ///
 /// 1. Correct potentially invalid `m:etag` attribute values on an `<entry>` tag:
@@ -57,7 +57,7 @@ pub fn default_xml_namespace_sap() -> String {
 ///    ```
 ///
 /// 1. Entity set content properties containing text descriptions are not enclosed in double quotes, neither is it the
-///    convemtion to escape or character encode special characters.
+///    convention to escape or character encode special characters.
 ///    E.G.:
 ///
 ///    ```xml
