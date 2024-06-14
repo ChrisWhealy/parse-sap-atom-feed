@@ -38,8 +38,9 @@ The general approach to consuming such a service is as follows:
 
    [dependencies]
    chrono = { version = "0.4", features = ["serde"]}
-   parse-sap-atom-feed = "0.1"
-   rust_decimal = "1.30"
+   parse-sap-atom-feed = "0.2"
+   quick-xml = { version = "0.32", features = ["serialize"] }
+   rust_decimal = { version = "1", features = ["serde-with-str"]}
    serde = { version = "1.0", features = ["derive"] }
    uuid = { version = "1.4", features = ["serde"]}
    ```
@@ -81,4 +82,5 @@ E.G. `https://my-sap-server.my-domain.com/sap/opu/odata/sap/ZCUSTOM_SERVICE_ORDE
 
 | Version | Description
 |--:|---
+0.2.5 | Read generic OData service document
 0.2.4 | Update `Cargo.toml` dependency versions

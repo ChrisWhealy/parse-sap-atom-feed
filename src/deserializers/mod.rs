@@ -5,6 +5,18 @@ use serde::{
 };
 use std::{fmt, str::FromStr};
 
+static ONE: &str = "1";
+
+pub fn default_sap_content_version() -> String {
+    String::from(ONE)
+}
+pub fn default_true() -> bool {
+    true
+}
+pub fn default_false() -> bool {
+    false
+}
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 /// Deserialize String to Boolean
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

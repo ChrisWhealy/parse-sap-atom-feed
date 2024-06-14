@@ -1,0 +1,77 @@
+<app:service
+        xmlns:app="http://www.w3.org/2007/app"
+        xmlns:atom="http://www.w3.org/2005/Atom"
+        xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+        xmlns:sap="http://www.sap.com/Protocols/SAPData"
+        xml:base="https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwbep/GWSAMPLE_BASIC/"
+        xml:lang="en">
+    <app:workspace>
+        <atom:title type="text">Data</atom:title>
+        <app:collection sap:content-version="1" href="BusinessPartnerSet">
+            <atom:title type="text">BusinessPartnerSet</atom:title>
+            <sap:member-title>BusinessPartner</sap:member-title>
+        </app:collection>
+        <app:collection sap:content-version="1" href="ProductSet">
+            <atom:title type="text">ProductSet</atom:title>
+            <sap:member-title>Product</sap:member-title>
+        </app:collection>
+        <app:collection sap:updatable="false" sap:content-version="1" href="SalesOrderSet">
+            <atom:title type="text">SalesOrderSet</atom:title>
+            <sap:member-title>SalesOrder</sap:member-title>
+        </app:collection>
+        <app:collection sap:content-version="1" href="SalesOrderLineItemSet">
+            <atom:title type="text">SalesOrderLineItemSet</atom:title>
+            <sap:member-title>SalesOrderLineItem</sap:member-title>
+        </app:collection>
+        <app:collection sap:content-version="1" href="ContactSet">
+            <atom:title type="text">ContactSet</atom:title>
+            <sap:member-title>Contact</sap:member-title>
+        </app:collection>
+        <app:collection sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1" href="VH_SexSet">
+            <atom:title type="text">VH_SexSet</atom:title>
+            <sap:member-title>VH_Sex</sap:member-title>
+        </app:collection>
+        <app:collection sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1" href="VH_CountrySet">
+            <atom:title type="text">VH_CountrySet</atom:title>
+            <sap:member-title>VH_Country</sap:member-title>
+        </app:collection>
+        <app:collection sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1" href="VH_AddressTypeSet">
+            <atom:title type="text">VH_AddressTypeSet</atom:title>
+            <sap:member-title>VH_AddressType</sap:member-title>
+        </app:collection>
+        <app:collection sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1" href="VH_CategorySet">
+            <atom:title type="text">VH_CategorySet</atom:title>
+            <sap:member-title>VH_Category</sap:member-title>
+        </app:collection>
+        <app:collection sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1" href="VH_CurrencySet">
+            <atom:title type="text">VH_CurrencySet</atom:title>
+            <sap:member-title>VH_Currency</sap:member-title>
+        </app:collection>
+        <app:collection sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1" href="VH_UnitQuantitySet">
+            <atom:title type="text">VH_UnitQuantitySet</atom:title>
+            <sap:member-title>VH_UnitQuantity</sap:member-title>
+        </app:collection>
+        <app:collection sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1" href="VH_UnitWeightSet">
+            <atom:title type="text">VH_UnitWeightSet</atom:title>
+            <sap:member-title>VH_UnitWeight</sap:member-title>
+        </app:collection>
+        <app:collection sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1" href="VH_UnitLengthSet">
+            <atom:title type="text">VH_UnitLengthSet</atom:title>
+            <sap:member-title>VH_UnitLength</sap:member-title>
+        </app:collection>
+        <app:collection sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1" href="VH_ProductTypeCodeSet">
+            <atom:title type="text">VH_ProductTypeCodeSet</atom:title>
+            <sap:member-title>VH_ProductTypeCode</sap:member-title>
+        </app:collection>
+        <app:collection sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1" href="VH_BPRoleSet">
+            <atom:title type="text">VH_BPRoleSet</atom:title>
+            <sap:member-title>VH_BPRole</sap:member-title>
+        </app:collection>
+        <app:collection sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1" href="VH_LanguageSet">
+            <atom:title type="text">VH_LanguageSet</atom:title>
+            <sap:member-title>VH_Language</sap:member-title>
+        </app:collection>
+    </app:workspace>
+    <atom:link rel="self" href="https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwbep/GWSAMPLE_BASIC/"/>
+    <atom:link rel="latest-version" href="https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwbep/GWSAMPLE_BASIC/"/>
+</app:service>

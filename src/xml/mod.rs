@@ -17,6 +17,9 @@ pub fn default_xml_language() -> String {
 pub fn default_xml_namespace() -> String {
     "http://schemas.microsoft.com/ado/2008/09/edm".to_string()
 }
+pub fn default_xml_namespace_app() -> String {
+    "http://www.w3.org/2007/app".to_string()
+}
 pub fn default_xml_namespace_atom() -> Option<String> {
     Some("http://www.w3.org/2005/Atom".to_string())
 }

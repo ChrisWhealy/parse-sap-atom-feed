@@ -1,7 +1,7 @@
 [package]
 name = "parse-sap-atom-feed"
-version = "0.2.4"
-authors = ["Chris Whealy <chris@lighthouse.no>"]
+version = "0.2.5"
+authors = ["Chris Whealy <chris@whealy.com>"]
 edition = "2021"
 description = "Parse an SAP OData V2 XML atom:Feed"
 keywords = ["odata", "sap", "atom", "parser", "opendata"]
