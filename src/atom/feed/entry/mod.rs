@@ -30,6 +30,7 @@ pub struct Entry<T> {
     pub links: Vec<AtomLink>,
 
     pub content: Content<T>,
+    pub properties: Option<T>,
 }
 
 impl<T> std::str::FromStr for Entry<T>

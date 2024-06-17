@@ -17,5 +17,10 @@ pub struct Content<T> {
     #[serde(rename = "@d", default = "default_xml_namespace_d")]
     pub namespace_d: String,
 
-    pub properties: T,
+    // If the `src` attribute is populated, then the `properties` attribute will be empty
+    // If the `src` attribute is missing, then the properties element exists inside the `content` element
+    #[serde(rename = "@src")]
+    pub src: Option<String>,
+
+    pub properties: Option<T>,
 }

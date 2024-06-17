@@ -82,5 +82,6 @@ E.G. `https://my-sap-server.my-domain.com/sap/opu/odata/sap/ZCUSTOM_SERVICE_ORDE
 
 | Version | Description
 |--:|---
+0.2.6 | As per <https://validator.w3.org/feed/docs/atom.html#requiredEntryElements>, the Atom `<content>` element should either contain or link to, the complete content of the entry.<br>If the `src` attribute is present, then the `<properties>` element (if present) exists as a sibling of the `<content>` element.<br>If the `src` attribute is missing, the `<properties>` element must exist as a child of the `<content>` element.<br><br>Add support for out-of-order XML elements (quick-xml feature `overlapped-lists`)  
 0.2.5 | Read generic OData service document
 0.2.4 | Update `Cargo.toml` dependency versions
