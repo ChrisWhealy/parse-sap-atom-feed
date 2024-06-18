@@ -2,30 +2,36 @@
 
 ***This is a work in progress!***
 
-The crate is designed to work in conjunction with the source code generated from the crate [`parse-sap-odata`](https://crates.io/crates/parse-sap-odata).
+The crate is designed to work in conjunction with the source code generated from the
+crate [`parse-sap-odata`](https://crates.io/crates/parse-sap-odata).
 
-Crate `parse-sap-odata` is invoked by a Rust build script to parse an OData XML metadata file and generates the Rust `struct`s and `enum`s needed to consume the entity set data described by that metadata.
+Crate `parse-sap-odata` is invoked by a Rust build script to parse an OData XML metadata file and generates the
+Rust `struct`s and `enum`s needed to consume the entity set data described by that metadata.
 
-This crate `parse-sap-atom-feed` then makes use of the `struct`s and `enum`s generated above and allows your business app to consume the XML returned when requesting entity sets from this OData service.
+This crate `parse-sap-atom-feed` then makes use of the `struct`s and `enum`s generated above and allows your business
+app to consume the XML returned when requesting entity sets from this OData service.
 
 ## Changes in V0.2
 
-The main change in version 0.2 is to adopt `quick-xml`'s [`@`-prefixed attribute syntax](https://docs.rs/quick-xml/latest/quick_xml/de/index.html#mapping-xml-to-rust-types) introduced in `0.27` and higher.
+The main change in version 0.2 is to adopt `quick-xml`'
+s [`@`-prefixed attribute syntax](https://docs.rs/quick-xml/latest/quick_xml/de/index.html#mapping-xml-to-rust-types)
+introduced in `0.27` and higher.
 
 ## Example Usage
 
 You want to develop a Rust application that can consume the entity set data exposed by an SAP OData V2 service.
 
-For the purposes of instruction, let's say you're working with a custom OData service that displays services ordered either by functional location or by date:
+For the purposes of instruction, let's say you're working with a custom OData service that displays services ordered
+either by functional location or by date:
 
-| | |
-|---|---|
-| Rust Application | `zcustom-service-orders`
-| OData Service URL | `https://my-sap-server.my-domain.com/sap/opu/odata/sap`
-| OData Service Name | `ZCUSTOM_SERVICE_ORDERS_SRV`
-| OData Schema Name | `ZCUSTOM_SERVICE_ORDERS`
-| Entity Names | `SERVICE_ORDERS_BY_FLOC`<br>`SERVICE_ORDERS_BY_DATE`
-| Entity Type | `ZServiceOrder`
+|                    |                                                         |
+|--------------------|---------------------------------------------------------|
+| Rust Application   | `zcustom-service-orders`                                
+| OData Service URL  | `https://my-sap-server.my-domain.com/sap/opu/odata/sap` 
+| OData Service Name | `ZCUSTOM_SERVICE_ORDERS_SRV`                            
+| OData Schema Name  | `ZCUSTOM_SERVICE_ORDERS`                                
+| Entity Names       | `SERVICE_ORDERS_BY_FLOC`<br>`SERVICE_ORDERS_BY_DATE`    
+| Entity Type        | `ZServiceOrder`                                         
 
 The general approach to consuming such a service is as follows:
 
@@ -46,7 +52,7 @@ The general approach to consuming such a service is as follows:
    ```
 1. `mkdir odata`
 1. Display your service's metadata.
-E.G. `https://my-sap-server.my-domain.com/sap/opu/odata/sap/ZCUSTOM_SERVICE_ORDERS_SRV/$metadata`
+   E.G. `https://my-sap-server.my-domain.com/sap/opu/odata/sap/ZCUSTOM_SERVICE_ORDERS_SRV/$metadata`
 1. Save the metadata as the file `zcustom_service_orders.xml` in the `odata` directory
 1. Create a `build.rs` file in same directory as `Cargo.toml` and add at least the following:
    ```rust
@@ -80,8 +86,9 @@ E.G. `https://my-sap-server.my-domain.com/sap/opu/odata/sap/ZCUSTOM_SERVICE_ORDE
 
 ## Change Log
 
-| Version | Description
-|--:|---
-0.2.6 | As per <https://validator.w3.org/feed/docs/atom.html#requiredEntryElements>, the Atom `<content>` element should either contain or link to, the complete content of the entry.<br>If the `src` attribute is present, then the `<properties>` element (if present) exists as a sibling of the `<content>` element.<br>If the `src` attribute is missing, the `<properties>` element must exist as a child of the `<content>` element.<br><br>Add support for out-of-order XML elements (quick-xml feature `overlapped-lists`)  
-0.2.5 | Read generic OData service document
-0.2.4 | Update `Cargo.toml` dependency versions
+| Version | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+|--------:|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+   0.2.7 | Parse an Atom feed of `<entry>` elements                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+   0.2.6 | As per <https://validator.w3.org/feed/docs/atom.html#requiredEntryElements>, the Atom `<content>` element should either contain or link to, the complete content of the entry.<br>If the `src` attribute is present, then the `<properties>` element (if present) exists as a sibling of the `<content>` element.<br>If the `src` attribute is missing, the `<properties>` element must exist as a child of the `<content>` element.<br><br>Add support for out-of-order XML elements (quick-xml feature `overlapped-lists`) 
+   0.2.5 | Read generic OData service document                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+   0.2.4 | Update `Cargo.toml` dependency versions                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      

@@ -1,9 +1,26 @@
+use serde::{de::DeserializeOwned, Deserialize, Serialize};
+
+use crate::{
+    atom::feed::{AtomLink, entry::content::Content},
+    deserializers::{default_false, default_xml_dataservices_scheme},
+};
+
 pub mod category;
 pub mod content;
 
-use crate::atom::feed::AtomLink;
-use content::Content;
-use serde::{de::DeserializeOwned, Deserialize, Serialize};
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+/// Represents a `<category>` tag with an Atom `<entry>`
+#[derive(Debug, Serialize, Deserialize)]
+pub struct EntryCategory {
+    #[serde(rename = "@term")]
+    pub term: String,
+    #[serde(rename = "@scheme", default = "default_xml_dataservices_scheme")]
+    pub scheme: String,
+    #[serde(rename = "@label")]
+    pub label: Option<String>,
+    #[serde(rename = "@fixed", default = "default_false")]
+    pub fixed: bool,
+}
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 /// Represents an Atom `<entry>` of type `<T>` where `<T>` is the entity type of this particular entity set
@@ -24,7 +41,7 @@ pub struct Entry<T> {
     pub id: String,
     pub title: String,
     pub updated: String,
-    pub category: String,
+    pub category: EntryCategory,
 
     #[serde(rename = "link")]
     pub links: Vec<AtomLink>,
@@ -43,3 +60,7 @@ where
         quick_xml::de::from_str(s)
     }
 }
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#[cfg(test)]
+pub mod unit_tests;

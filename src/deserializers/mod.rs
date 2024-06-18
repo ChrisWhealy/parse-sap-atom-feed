@@ -16,6 +16,9 @@ pub fn default_true() -> bool {
 pub fn default_false() -> bool {
     false
 }
+pub fn default_xml_dataservices_scheme() -> String {
+    "http://schemas.microsoft.com/ado/2007/08/dataservices/scheme".to_string()
+}
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 /// Deserialize String to Boolean
