@@ -1,11 +1,12 @@
+use serde::{Deserialize, Serialize};
+
 use crate::deserializers::{
     de_str_to_bool, default_false, default_sap_content_version, default_true,
 };
 use crate::xml::{
-    default_xml_namespace_app, default_xml_namespace_atom, default_xml_namespace_m,
-    default_xml_namespace_sap, default_xml_language
+    default_xml_language, default_xml_namespace_app, default_xml_namespace_atom,
+    default_xml_namespace_m, default_xml_namespace_sap,
 };
-use serde::{Deserialize, Serialize};
 
 pub mod feed;
 
@@ -30,6 +31,14 @@ pub struct AtomLink {
 
     #[serde(rename = "@title")]
     pub title: Option<String>,
+}
+
+impl std::str::FromStr for AtomLink {
+    type Err = quick_xml::DeError;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        quick_xml::de::from_str(s)
+    }
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -81,6 +90,14 @@ pub struct AtomCollection {
     pub link: Option<AtomLink>,
 }
 
+impl std::str::FromStr for AtomCollection {
+    type Err = quick_xml::DeError;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        quick_xml::de::from_str(s)
+    }
+}
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 /// Represents an `<atom:workspace>` tag
 #[derive(Debug, Serialize, Deserialize)]
@@ -89,6 +106,14 @@ pub struct AtomWorkspace {
 
     #[serde(rename = "collection")]
     pub collections: Vec<AtomCollection>,
+}
+
+impl std::str::FromStr for AtomWorkspace {
+    type Err = quick_xml::DeError;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        quick_xml::de::from_str(s)
+    }
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -117,6 +142,14 @@ pub struct AtomService {
     pub workspace: AtomWorkspace,
     #[serde(rename = "link")]
     pub links: Vec<AtomLink>,
+}
+
+impl std::str::FromStr for AtomService {
+    type Err = quick_xml::DeError;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        quick_xml::de::from_str(s)
+    }
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

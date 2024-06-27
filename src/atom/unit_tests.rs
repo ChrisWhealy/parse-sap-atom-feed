@@ -5,31 +5,7 @@ use std::{
     str::FromStr,
 };
 
-use super::{AtomLink, AtomWorkspace, AtomService};
-
-impl std::str::FromStr for AtomLink {
-    type Err = quick_xml::DeError;
-
-    fn from_str(s: &str) -> Result<Self, Self::Err> {
-        quick_xml::de::from_str(s)
-    }
-}
-
-impl std::str::FromStr for AtomWorkspace {
-    type Err = quick_xml::DeError;
-
-    fn from_str(s: &str) -> Result<Self, Self::Err> {
-        quick_xml::de::from_str(s)
-    }
-}
-
-impl std::str::FromStr for AtomService {
-    type Err = quick_xml::DeError;
-
-    fn from_str(s: &str) -> Result<Self, Self::Err> {
-        quick_xml::de::from_str(s)
-    }
-}
+use super::{AtomLink, AtomService, AtomWorkspace};
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #[test]
@@ -108,20 +84,38 @@ pub fn should_parse_atom_service() {
             let atom_srv = AtomService::from_str(&xml).unwrap();
 
             assert_eq!(atom_srv.namespace_app, "http://www.w3.org/2007/app");
-            assert_eq!(atom_srv.namespace_atom, Some(String::from("http://www.w3.org/2005/Atom")));
-            assert_eq!(atom_srv.namespace_m, "http://schemas.microsoft.com/ado/2007/08/dataservices/metadata");
-            assert_eq!(atom_srv.namespace_sap, "http://www.sap.com/Protocols/SAPData");
-            assert_eq!(atom_srv.base_url, "https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwbep/GWSAMPLE_BASIC/");
+            assert_eq!(
+                atom_srv.namespace_atom,
+                Some(String::from("http://www.w3.org/2005/Atom"))
+            );
+            assert_eq!(
+                atom_srv.namespace_m,
+                "http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+            );
+            assert_eq!(
+                atom_srv.namespace_sap,
+                "http://www.sap.com/Protocols/SAPData"
+            );
+            assert_eq!(
+                atom_srv.base_url,
+                "https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwbep/GWSAMPLE_BASIC/"
+            );
             assert_eq!(atom_srv.language, "en");
 
             assert_eq!(atom_srv.workspace.collections.len(), 16);
             assert_eq!(atom_srv.links.len(), 2);
 
             assert_eq!(atom_srv.links[0].rel, "self");
-            assert_eq!(atom_srv.links[0].href, "https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwbep/GWSAMPLE_BASIC/");
+            assert_eq!(
+                atom_srv.links[0].href,
+                "https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwbep/GWSAMPLE_BASIC/"
+            );
 
             assert_eq!(atom_srv.links[1].rel, "latest-version");
-            assert_eq!(atom_srv.links[1].href, "https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwbep/GWSAMPLE_BASIC/");
+            assert_eq!(
+                atom_srv.links[1].href,
+                "https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwbep/GWSAMPLE_BASIC/"
+            );
         }
         Err(err) => println!("XML test data was not in UTF8 format: {}", err),
     };
