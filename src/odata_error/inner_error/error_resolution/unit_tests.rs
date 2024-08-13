@@ -6,6 +6,7 @@ use std::{
 };
 
 use super::ErrorResolution;
+use crate::test_utils::*;
 
 impl std::str::FromStr for ErrorResolution {
     type Err = quick_xml::DeError;
@@ -17,7 +18,7 @@ impl std::str::FromStr for ErrorResolution {
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #[test]
-pub fn should_parse_error_resolution() {
+pub fn should_parse_error_resolution() -> Result<(), String> {
     let mut xml_buffer: Vec<u8> = Vec::new();
     let test_data = File::open(Path::new("./test_data/error_resolution.xml")).unwrap();
     let _file_size = BufReader::new(test_data).read_to_end(&mut xml_buffer);
@@ -26,11 +27,9 @@ pub fn should_parse_error_resolution() {
         Ok(xml) => {
             let err_res = ErrorResolution::from_str(&xml).unwrap();
 
-            assert!(err_res
-                .sap_transaction
-                .starts_with("For backend administrators"));
-            assert!(err_res.sap_note.starts_with("See SAP Note 1797736"));
+            handle_test_bool(err_res.sap_transaction.starts_with("For backend administrators"))?;
+            handle_test_bool(err_res.sap_note.starts_with("See SAP Note 1797736"))
         }
-        Err(err) => println!("XML test data was not in UTF8 format: {}", err),
-    };
+        Err(err) => Err(format!("XML test data was not in UTF8 format: {err}")),
+    }
 }

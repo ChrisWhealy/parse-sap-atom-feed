@@ -1,7 +1,7 @@
 use serde::{de::DeserializeOwned, Deserialize, Serialize};
 
 use crate::{
-    atom::feed::{AtomLink, entry::content::Content},
+    atom::feed::{entry::content::Content, AtomLink},
     deserializers::{default_false, default_xml_dataservices_scheme},
 };
 
