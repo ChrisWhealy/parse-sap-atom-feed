@@ -76,7 +76,7 @@ The general approach to consuming such a service is as follows:
 
 | Version | Task    | Description
 |--:|---------|---
-1.0.0 | Release | Promote to version 1
+1.0.0 | Release | Promote to version 1.0
 0.2.9 | Chore   | Handle all test failures without panic
 0.2.8 | Feature | Implement `std::str::FromStr` for Atom types
 0.2.7 | Feature | Parse an Atom feed of `<entry>` elements
