@@ -2,7 +2,8 @@ use serde::{de::DeserializeOwned, Deserialize, Serialize};
 
 use crate::{
     atom::feed::{entry::content::Content, AtomLink},
-    deserializers::{default_false, default_xml_dataservices_scheme},
+    deserializers::default_false,
+    xml::default_xml_data_services_scheme,
 };
 
 pub mod category;
@@ -14,7 +15,7 @@ pub mod content;
 pub struct EntryCategory {
     #[serde(rename = "@term")]
     pub term: String,
-    #[serde(rename = "@scheme", default = "default_xml_dataservices_scheme")]
+    #[serde(rename = "@scheme", default = "default_xml_data_services_scheme")]
     pub scheme: String,
     #[serde(rename = "@label")]
     pub label: Option<String>,
@@ -47,6 +48,10 @@ pub struct Entry<T> {
     pub links: Vec<AtomLink>,
 
     pub content: Content<T>,
+
+    // This `properties` field will only be populated if the `src` attribute of above `<content>` element exists.
+    // If the `src` attribute is missing, then this `properties` field will be `None` and there will be a `properties`
+    // child within `<content>`
     pub properties: Option<T>,
 }
 

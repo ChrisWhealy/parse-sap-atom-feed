@@ -27,7 +27,10 @@ pub fn should_parse_inner_error() -> Result<(), String> {
         Ok(xml) => {
             let inner_err = InnerError::from_str(&xml).unwrap();
 
-            handle_test_comparison(&inner_err.transaction_id, &"AE181B240AA70000E006489348B6C463".to_string())?;
+            handle_test_comparison(
+                &inner_err.transaction_id,
+                &"AE181B240AA70000E006489348B6C463".to_string(),
+            )?;
             handle_test_comparison(&inner_err.timestamp, &"20230905123946.1330410".to_string())
         }
         Err(err) => Err(format!("XML test data was not in UTF8 format: {err}")),

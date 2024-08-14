@@ -53,7 +53,7 @@ pub fn should_parse_atom_workspace() -> Result<(), String> {
             let atom_ws = AtomWorkspace::from_str(&xml).unwrap();
 
             handle_test_comparison(&atom_ws.title, &"Data".to_string())?;
-            handle_test_comparison(&atom_ws.collections.len(), &(16 as usize))?;
+            handle_test_comparison(&atom_ws.collections.len(), &(16usize))?;
             handle_test_bool(atom_ws.collections[0].is_creatable)?;
             handle_test_bool(atom_ws.collections[0].is_updatable)?;
             handle_test_bool(atom_ws.collections[0].is_deletable)?;
@@ -106,8 +106,8 @@ pub fn should_parse_atom_service() -> Result<(), String> {
             handle_test_comparison(&atom_srv.namespace_sap, &default_xml_namespace_sap())?;
             handle_test_comparison(&atom_srv.base_url, &base_url)?;
             handle_test_comparison(&atom_srv.language, &"en".to_string())?;
-            handle_test_comparison(&atom_srv.workspace.collections.len(), &(16 as usize))?;
-            handle_test_comparison(&atom_srv.links.len(), &(2 as usize))?;
+            handle_test_comparison(&atom_srv.workspace.collections.len(), &(16usize))?;
+            handle_test_comparison(&atom_srv.links.len(), &(2usize))?;
             handle_test_comparison(&atom_srv.links[0].rel, &"self".to_string())?;
             handle_test_comparison(&atom_srv.links[0].href, &base_url)?;
             handle_test_comparison(&atom_srv.links[1].rel, &"latest-version".to_string())?;

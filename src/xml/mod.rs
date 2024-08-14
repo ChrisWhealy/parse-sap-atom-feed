@@ -1,6 +1,18 @@
 use regex::Regex;
 
-pub static XML_DECLARATION: &[u8] = "<?xml version=\"1.0\" encoding=\"utf-8\"?>".as_bytes();
+static ISO_LANGUAGE_ENGLISH: &'static str = "en";
+static XML_NAMESPACE_MS_DATA_SERVICES: &'static str =
+    "http://schemas.microsoft.com/ado/2007/08/dataservices";
+static XML_NAMESPACE_MS_DATA_SERVICES_METADATA: &'static str =
+    "http://schemas.microsoft.com/ado/2007/08/dataservices/metadata";
+static XML_NAMESPACE_MS_DATA_SERVICES_SCHEME: &'static str =
+    "http://schemas.microsoft.com/ado/2007/08/dataservices/scheme";
+static XML_NAMESPACE_MS_EDM: &'static str = "http://schemas.microsoft.com/ado/2008/09/edm";
+static XML_NAMESPACE_MS_EDMX: &'static str = "http://schemas.microsoft.com/ado/2007/06/edmx";
+static XML_NAMESPACE_OASIS_ODATA_EDM: &'static str = "http://docs.oasis-open.org/odata/ns/edm";
+static XML_NAMESPACE_SAP_DATA: &'static str = "http://www.sap.com/Protocols/SAPData";
+static XML_NAMESPACE_W3_APP: &'static str = "http://www.w3.org/2007/app";
+static XML_NAMESPACE_W3_ATOM: &'static str = "http://www.w3.org/2005/Atom";
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // XML Defaults
@@ -12,31 +24,34 @@ pub fn default_false() -> bool {
     false
 }
 pub fn default_xml_language() -> String {
-    "en".to_string()
+    ISO_LANGUAGE_ENGLISH.to_string()
 }
 pub fn default_xml_namespace() -> String {
-    "http://schemas.microsoft.com/ado/2008/09/edm".to_string()
+    XML_NAMESPACE_MS_EDM.to_string()
 }
 pub fn default_xml_namespace_app() -> String {
-    "http://www.w3.org/2007/app".to_string()
+    XML_NAMESPACE_W3_APP.to_string()
 }
 pub fn default_xml_namespace_atom() -> Option<String> {
-    Some("http://www.w3.org/2005/Atom".to_string())
+    Some(XML_NAMESPACE_W3_ATOM.to_string())
 }
 pub fn default_xml_namespace_edmx() -> String {
-    "http://schemas.microsoft.com/ado/2007/06/edmx".to_string()
+    XML_NAMESPACE_MS_EDMX.to_string()
 }
 pub fn default_xml_namespace_d() -> String {
-    "http://schemas.microsoft.com/ado/2007/08/dataservices".to_string()
+    XML_NAMESPACE_MS_DATA_SERVICES.to_string()
 }
 pub fn default_xml_namespace_m() -> String {
-    "http://schemas.microsoft.com/ado/2007/08/dataservices/metadata".to_string()
+    XML_NAMESPACE_MS_DATA_SERVICES_METADATA.to_string()
 }
 pub fn default_xml_namespace_oasis() -> String {
-    "http://docs.oasis-open.org/odata/ns/edm".to_string()
+    XML_NAMESPACE_OASIS_ODATA_EDM.to_string()
 }
 pub fn default_xml_namespace_sap() -> String {
-    "http://www.sap.com/Protocols/SAPData".to_string()
+    XML_NAMESPACE_SAP_DATA.to_string()
+}
+pub fn default_xml_data_services_scheme() -> String {
+    XML_NAMESPACE_MS_DATA_SERVICES_SCHEME.to_string()
 }
 
 /// # CORRECT FORMATTING ERRORS IN RAW XML

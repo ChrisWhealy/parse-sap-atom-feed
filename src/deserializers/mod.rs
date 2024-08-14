@@ -16,9 +16,6 @@ pub fn default_true() -> bool {
 pub fn default_false() -> bool {
     false
 }
-pub fn default_xml_dataservices_scheme() -> String {
-    "http://schemas.microsoft.com/ado/2007/08/dataservices/scheme".to_string()
-}
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 /// Deserialize String to Boolean
@@ -38,7 +35,7 @@ where
 struct NaiveDateTimeVisitor;
 
 impl<'de> Visitor<'de> for NaiveDateTimeVisitor {
-    type Value = chrono::NaiveDateTime;
+    type Value = NaiveDateTime;
 
     fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
         formatter.write_str("an XML tag containing something like either <d:DeliveryDate>2018-01-07T23:00:00.0000000</d:DeliveryDate> or <d:DateOfBirth m:null=\"true\"/>")
@@ -58,24 +55,22 @@ impl<'de> Visitor<'de> for NaiveDateTimeVisitor {
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 pub fn de_date_to_optional_naive_date_time<'de, D>(
     deserializer: D,
-) -> Result<Option<chrono::NaiveDateTime>, D::Error>
+) -> Result<Option<NaiveDateTime>, D::Error>
 where
     D: Deserializer<'de>,
 {
-    match chrono::NaiveDateTime::deserialize(deserializer) {
+    match NaiveDateTime::deserialize(deserializer) {
         Ok(ndt) => Ok(Some(ndt)),
         Err(_err) => Ok(None),
     }
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-pub fn de_date_to_naive_date_time<'de, D>(
-    deserializer: D,
-) -> Result<chrono::NaiveDateTime, D::Error>
+pub fn de_date_to_naive_date_time<'de, D>(deserializer: D) -> Result<NaiveDateTime, D::Error>
 where
     D: Deserializer<'de>,
 {
-    chrono::NaiveDateTime::deserialize(deserializer)
+    NaiveDateTime::deserialize(deserializer)
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

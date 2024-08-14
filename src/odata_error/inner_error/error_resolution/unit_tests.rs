@@ -27,7 +27,11 @@ pub fn should_parse_error_resolution() -> Result<(), String> {
         Ok(xml) => {
             let err_res = ErrorResolution::from_str(&xml).unwrap();
 
-            handle_test_bool(err_res.sap_transaction.starts_with("For backend administrators"))?;
+            handle_test_bool(
+                err_res
+                    .sap_transaction
+                    .starts_with("For backend administrators"),
+            )?;
             handle_test_bool(err_res.sap_note.starts_with("See SAP Note 1797736"))
         }
         Err(err) => Err(format!("XML test data was not in UTF8 format: {err}")),

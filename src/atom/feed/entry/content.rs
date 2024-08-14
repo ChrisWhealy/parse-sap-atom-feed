@@ -22,5 +22,6 @@ pub struct Content<T> {
     #[serde(rename = "@src")]
     pub src: Option<String>,
 
+    // Will only be populated if the above `src` attribute is missing
     pub properties: Option<T>,
 }

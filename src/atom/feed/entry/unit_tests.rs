@@ -8,14 +8,14 @@ use std::{
 use serde::{Deserialize, Serialize};
 
 use super::Entry;
-use crate::{deserializers::default_xml_dataservices_scheme, test_utils::*};
+use crate::{xml::default_xml_data_services_scheme, test_utils::*};
 
 // -----------------------------------------------------------------------------
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "PascalCase")]
 pub struct DummyService {}
 
-impl std::str::FromStr for DummyService {
+impl FromStr for DummyService {
     type Err = quick_xml::DeError;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
@@ -40,10 +40,10 @@ pub fn should_parse_atom_entry() -> Result<(), String> {
             handle_test_comparison(&entry.id, &format!("{}{}", url, collection))?;
             handle_test_comparison(&entry.title, &collection)?;
             handle_test_comparison(&entry.updated, &"2024-06-18T11:29:35Z".to_string())?;
-            handle_test_comparison(&entry.links.len(), &(4 as usize))?;
+            handle_test_comparison(&entry.links.len(), &(4usize))?;
             handle_test_bool(!entry.category.fixed)?;
             handle_test_comparison_opt(&entry.category.label, &None)?;
-            handle_test_comparison(&entry.category.scheme, &default_xml_dataservices_scheme())?;
+            handle_test_comparison(&entry.category.scheme, &default_xml_data_services_scheme())?;
             handle_test_comparison(&entry.category.term, &"catalogservice.Service".to_string())?;
             handle_test_comparison_opt(
                 &entry.content.content_type,
