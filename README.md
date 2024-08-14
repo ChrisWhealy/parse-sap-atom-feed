@@ -63,7 +63,7 @@ The general approach to consuming such a service is as follows:
    use zcustom_service_orders::*;
 
    fn main() {
-      let raw_xml: String = /* Whatever code is needed to fetch the entity set data as a raw XML string */;
+      let raw_xml: String = /* Whatever code is needed to fetch the entity set data as a raw XML string */
 
       // You might need to sanitise the raw XML string before attempting to parse it
       let clean_xml = sanitise_xml(raw_xml);
@@ -74,12 +74,12 @@ The general approach to consuming such a service is as follows:
 
 ## Change Log
 
-| Version | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
-|--------:|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-   1.0.0 | Promote to version 1
-   0.2.9 | (Chore) Handle all test failures without panic<br>No changes to functionality
-   0.2.8 | Implement `std::str::FromStr` for Atom types
-   0.2.7 | Parse an Atom feed of `<entry>` elements
-   0.2.6 | As per <https://validator.w3.org/feed/docs/atom.html#requiredEntryElements>, the Atom `<content>` element should either contain or link to, the complete content of the entry.<br>If the `src` attribute is present, then the `<properties>` element (if present) exists as a sibling of the `<content>` element.<br>If the `src` attribute is missing, the `<properties>` element must exist as a child of the `<content>` element.<br><br>Add support for out-of-order XML elements (quick-xml feature `overlapped-lists`)
-   0.2.5 | Read generic OData service document
-   0.2.4 | Update `Cargo.toml` dependency versions
+| Version | Task    | Description
+|--:|---------|---
+1.0.0 | Release | Promote to version 1
+0.2.9 | Chore   | Handle all test failures without panic<br>No changes to functionality
+0.2.8 | Feature | Implement `std::str::FromStr` for Atom types
+0.2.7 | Feature | Parse an Atom feed of `<entry>` elements
+0.2.6 | Feature | As per <https://validator.w3.org/feed/docs/atom.html#requiredEntryElements>, the Atom `<content>` element should either contain or link to, the complete content of the entry.<br>If the `src` attribute is present, then the `<properties>` element (if present) exists as a sibling of the `<content>` element.<br>If the `src` attribute is missing, the `<properties>` element must exist as a child of the `<content>` element.<br><br>Add support for out-of-order XML elements (quick-xml feature `overlapped-lists`)
+0.2.5 | Feature | Read generic OData service document
+0.2.4 | Fix     | Update `Cargo.toml` dependency versions
