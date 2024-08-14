@@ -1,28 +1,16 @@
 # Parse an SAP OData V2 XML `atom:Feed`
 
-***This is a work in progress!***
+This crate is designed to work in conjunction with the source code generated from the crate [`parse-sap-odata`](https://crates.io/crates/parse-sap-odata).
 
-The crate is designed to work in conjunction with the source code generated from the
-crate [`parse-sap-odata`](https://crates.io/crates/parse-sap-odata).
+Crate `parse-sap-odata` is invoked by a Rust build script to parse an OData XML metadata file and generates the Rust `struct`s and `enum`s needed to consume the entity set data described by that metadata.
 
-Crate `parse-sap-odata` is invoked by a Rust build script to parse an OData XML metadata file and generates the
-Rust `struct`s and `enum`s needed to consume the entity set data described by that metadata.
-
-This crate `parse-sap-atom-feed` then makes use of the `struct`s and `enum`s generated above and allows your business
-app to consume the XML returned when requesting entity sets from this OData service.
-
-## Changes in V0.2
-
-The main change in version 0.2 is to adopt `quick-xml`'
-s [`@`-prefixed attribute syntax](https://docs.rs/quick-xml/latest/quick_xml/de/index.html#mapping-xml-to-rust-types)
-introduced in `0.27` and higher.
+This crate `parse-sap-atom-feed` then makes use of the `struct`s and `enum`s generated above and allows your business app to consume the XML returned when requesting entity sets from this OData service.
 
 ## Example Usage
 
 You want to develop a Rust application that can consume the entity set data exposed by an SAP OData V2 service.
 
-For the purposes of instruction, let's say you're working with a custom OData service that displays services ordered
-either by functional location or by date:
+For the purposes of instruction, let's say you're working with a custom OData service that displays services ordered either by functional location or by date:
 
 |                    |                                                         |
 |--------------------|---------------------------------------------------------|
@@ -51,7 +39,7 @@ The general approach to consuming such a service is as follows:
    uuid = { version = "1.4", features = ["serde"]}
    ```
 1. `mkdir odata`
-1. Display your service's metadata.
+1. Display your service's metadata.<br>
    E.G. `https://my-sap-server.my-domain.com/sap/opu/odata/sap/ZCUSTOM_SERVICE_ORDERS_SRV/$metadata`
 1. Save the metadata as the file `zcustom_service_orders.xml` in the `odata` directory
 1. Create a `build.rs` file in same directory as `Cargo.toml` and add at least the following:
