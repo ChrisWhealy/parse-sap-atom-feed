@@ -8,7 +8,7 @@ use std::{
 use super::Application;
 use crate::test_utils::*;
 
-impl std::str::FromStr for Application {
+impl FromStr for Application {
     type Err = quick_xml::DeError;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {

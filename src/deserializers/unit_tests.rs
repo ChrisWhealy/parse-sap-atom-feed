@@ -12,7 +12,7 @@ struct DateElement {
     created_at: chrono::NaiveDateTime,
 }
 
-impl std::str::FromStr for DateElement {
+impl FromStr for DateElement {
     type Err = quick_xml::DeError;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
@@ -28,7 +28,7 @@ struct OptionalDateElement {
     created_at: Option<chrono::NaiveDateTime>,
 }
 
-impl std::str::FromStr for OptionalDateElement {
+impl FromStr for OptionalDateElement {
     type Err = quick_xml::DeError;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {

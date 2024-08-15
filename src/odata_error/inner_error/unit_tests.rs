@@ -8,7 +8,7 @@ use std::{
 use super::InnerError;
 use crate::test_utils::*;
 
-impl std::str::FromStr for InnerError {
+impl FromStr for InnerError {
     type Err = quick_xml::DeError;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {

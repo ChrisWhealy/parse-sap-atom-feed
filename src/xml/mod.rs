@@ -108,9 +108,7 @@ fn sanitise_bad_etags(xml: String) -> String {
 /// Naked ampersand characters might occur in OData properties containing text descriptions.
 /// E.G.:
 ///
-/// ```
-/// <d:Category>PDAs & Organizers</d:Category>
-/// ```
+/// `<d:Category>PDAs & Organizers</d:Category>`
 ///
 /// Such characters must be replaced with the character encoding `&amp;`
 ///
@@ -119,7 +117,7 @@ fn sanitise_bad_etags(xml: String) -> String {
 ///
 /// This functionality assumes that the character string `&amp;` does not occur in the XML
 fn sanitise_naked_ampersand(xml: String) -> String {
-    let re = Regex::new(r"(\S)\&(\S)").unwrap();
+    let re = Regex::new(r"(\S)&(\S)").unwrap();
     let clean_xml = re.replace_all(&xml, "$1&amp;$2");
 
     clean_xml.replace(" & ", " &amp; ")
