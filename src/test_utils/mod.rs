@@ -9,6 +9,7 @@ pub fn handle_test_bool(received_bool: bool) -> Result<(), String> {
     }
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 pub fn handle_test_comparison<T>(received_val: &T, expected_val: &T) -> Result<(), String>
 where
     T: PartialEq + Clone + Debug + Display,
@@ -23,6 +24,7 @@ where
     }
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 pub fn handle_test_comparison_opt<T>(
     received_val: &Option<T>,
     expected_val: &Option<T>,

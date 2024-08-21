@@ -1,16 +1,16 @@
 use serde::{Deserialize, Serialize};
 
-use crate::deserializers::{
-    de_str_to_bool, default_false, default_sap_content_version, default_true,
-};
-use crate::xml::{
-    default_xml_language, default_xml_namespace_app, default_xml_namespace_atom,
-    default_xml_namespace_m, default_xml_namespace_sap,
+use crate::{
+    deserializers::{
+        default_false, default_sap_content_version, default_true, edm_string::to_bool,
+    },
+    xml::{
+        default_xml_language, default_xml_namespace_app, default_xml_namespace_atom,
+        default_xml_namespace_m, default_xml_namespace_sap,
+    },
 };
 
 pub mod feed;
-
-// use feed::Feed;
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 /// Represents an `<atom:link>` tag
@@ -47,35 +47,35 @@ impl std::str::FromStr for AtomLink {
 pub struct AtomCollection {
     #[serde(
         rename = "@creatable",
-        deserialize_with = "de_str_to_bool",
+        deserialize_with = "to_bool",
         default = "default_true"
     )]
     pub is_creatable: bool,
 
     #[serde(
         rename = "@updatable",
-        deserialize_with = "de_str_to_bool",
+        deserialize_with = "to_bool",
         default = "default_true"
     )]
     pub is_updatable: bool,
 
     #[serde(
         rename = "@deletable",
-        deserialize_with = "de_str_to_bool",
+        deserialize_with = "to_bool",
         default = "default_true"
     )]
     pub is_deletable: bool,
 
     #[serde(
         rename = "@pageable",
-        deserialize_with = "de_str_to_bool",
+        deserialize_with = "to_bool",
         default = "default_true"
     )]
     pub is_pageable: bool,
 
     #[serde(
         rename = "@searchable",
-        deserialize_with = "de_str_to_bool",
+        deserialize_with = "to_bool",
         default = "default_false"
     )]
     pub is_searchable: bool,

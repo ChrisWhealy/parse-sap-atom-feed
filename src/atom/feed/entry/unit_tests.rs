@@ -8,7 +8,7 @@ use std::{
 use serde::{Deserialize, Serialize};
 
 use super::Entry;
-use crate::{xml::default_xml_data_services_scheme, test_utils::*};
+use crate::{test_utils::*, xml::default_xml_data_services_scheme};
 
 // -----------------------------------------------------------------------------
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]

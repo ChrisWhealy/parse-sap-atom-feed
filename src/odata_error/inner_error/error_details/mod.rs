@@ -1,5 +1,4 @@
-use crate::deserializers::de_str_to_bool;
-use crate::xml::default_false;
+use crate::{deserializers::edm_string::to_bool, xml::default_false};
 use serde::{Deserialize, Serialize};
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -24,7 +23,7 @@ pub struct ErrorDetail {
     pub severity: String,
     pub target: Option<String>,
 
-    #[serde(deserialize_with = "de_str_to_bool", default = "default_false")]
+    #[serde(deserialize_with = "to_bool", default = "default_false")]
     pub transition: bool,
 }
 

@@ -1,5 +1,6 @@
-use super::{de_date_to_naive_date_time, de_date_to_optional_naive_date_time};
+use super::{to_naive_date_time, to_naive_date_time_opt};
 use crate::test_utils::*;
+
 use serde::Deserialize;
 use std::str::FromStr;
 
@@ -8,7 +9,7 @@ use std::str::FromStr;
 #[derive(Deserialize, PartialEq, Debug)]
 #[serde(rename_all = "PascalCase")]
 struct DateElement {
-    #[serde(deserialize_with = "de_date_to_naive_date_time")]
+    #[serde(deserialize_with = "to_naive_date_time")]
     created_at: chrono::NaiveDateTime,
 }
 
@@ -24,7 +25,7 @@ impl FromStr for DateElement {
 #[derive(Deserialize, PartialEq, Debug)]
 #[serde(rename_all = "PascalCase")]
 struct OptionalDateElement {
-    #[serde(deserialize_with = "de_date_to_optional_naive_date_time")]
+    #[serde(deserialize_with = "to_naive_date_time_opt")]
     created_at: Option<chrono::NaiveDateTime>,
 }
 
