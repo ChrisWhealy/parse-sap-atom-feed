@@ -14,9 +14,9 @@ This declaration says that a field called `Depth` exists that stores a decimal v
 
 ### Transforming `Edm.Decimal` to `rust_decimal::Decimal`
 
-An `Edm.Decinmal` field allows you to specify both the maximum number of digits in the decimal number (using the `Precision` aatribute), and the number of digits to the right of the decimal separator (using the `Scale` attribute).
+An `Edm.Decinmal` field allows you to specify both the maximum number of digits in the decimal number (using the `Precision` attribute), and the number of digits to the right of the decimal separator (using the `Scale` attribute).
 
-In a `rust_decimal::Decimal` value however, the maximum number of digits is hard-coded to 64.  Consequently, when transforming an `Edm.Decimal` value, we can make use of the `Scale` aatribute, but the `Precision` attribute has no meaning.
+In a `rust_decimal::Decimal` value however, the maximum number of digits is hard-coded to 64.  Consequently, when transforming an `Edm.Decimal` value, we can make use of the `Scale` attribute, but the `Precision` attribute has no meaning.
 
 ### `Edm.Decimal` Custom Deserializer
 
@@ -34,8 +34,8 @@ There are several points to notice here:
 1. Since the `<Property>` element does not contain the attribute `Nullable="false"`, the decimal value might be absent; therefore it must be declared inside an `Option`.
 1. The scale of a `rust_decimal::Decimal` value is defined at the time a new value is created.
     Consequently, the field declaration refers to a generic decimal value, without any reference to scale.
-1. Since the `Scale` attribute is part of an `Edm.Decimal` type declaration, this value can nly be preserved by having a custom serializer for each of the possible scale values.
-    Hence the custom serializer function name contains both the number of decimal places it will use (`3dp` in this case) and whether or not the value is wrapped in an `Option`.
+1. Since the `Scale` attribute is part of an `Edm.Decimal` type declaration, this value can only be preserved by implementing a different serializer function for each of the possible scale values.
+    Hence the serializer function name contains both the number of decimal places it will use (`3dp` in this case) and whether the value is wrapped in an `Option`.
 
 ### The Custom Deserializer Can Fail and Might Even Panic!
 
@@ -51,7 +51,7 @@ Consider the XML declaration of a `Property` called `Balance`:
 <Property Name="Balance" Type="Edm.Decimal" Precision="16" Scale="5" sap:unicode="false" sap:unit="CurrencyCode" sap:label="Account Balance"/>
 ```
 
-Based on the fact. that `Scale="5"`, the deserializer will expect a string value containing up to 5 decimal places.
+Knowing `Scale` equals `5`, the deserializer will expect a decimal string value containing up to 5 fractional digits.
 For example, all of these values will be parsed successfully:
 
 | XML String | Rust Declaration | `.to_string()`
@@ -69,4 +69,4 @@ But attempting to parse `123.456789` with `scale = 5` will cause the deserialize
 
 However, if any of the excess trailing digits are zeroes, these will first be trimmed before deciding whether or not to panic.
 
-E.G. Deserializing `123.456780` with `scale = 5` will not cause a panic, but deserializing `123.456789` with `scale = 5` will.
+E.G. With `scale = 5`, attempting to deserialize `123.4567800` will succeed because there is no loss of data, but attempting to deserialize `123.456789` will cause a panic.
