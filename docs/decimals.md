@@ -43,7 +43,7 @@ There are several points to notice here:
 
 If the value of `Scale` is greater than 28, then function `rust_decimal::Decimal::try_new()` will fail.
 
-#### Too Many Decimal Digits
+#### Too Many Fractional Digits
 
 Consider the XML declaration of a `Property` called `Balance`:
 
