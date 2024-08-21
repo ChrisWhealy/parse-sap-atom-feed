@@ -54,14 +54,14 @@ Consider the XML declaration of a `Property` called `Balance`:
 Knowing `Scale` equals `5`, the deserializer will expect a decimal string value containing up to 5 fractional digits.
 For example, all of these values will be parsed successfully:
 
-| XML String | Rust Declaration | `.to_string()`
-|---|---|--:
-| `1234` | `Decimal::try_new(123400000, 5)` | `1234.00000`
-| `123.4` | `Decimal::try_new(12340000, 5)` | `123.40000`
-| `12.34` | `Decimal::try_new(1234000, 5)` | `12.34000`
-| `1.234` | `Decimal::try_new(123400, 5)` | `1.23400`
-| `.1234` | `Decimal::try_new(12340, 5)` | `0.12340`
-| `.01234` | `Decimal::try_new(1234, 5)` | `0.01234`
+| XML String | Rust Declaration                 | `.to_string()` |
+|------------|----------------------------------|---------------:|
+| `1234`     | `Decimal::try_new(123400000, 5)` |   `1234.00000` |
+| `123.4`    | `Decimal::try_new(12340000, 5)`  |    `123.40000` |
+| `12.34`    | `Decimal::try_new(1234000, 5)`   |     `12.34000` |
+| `1.234`    | `Decimal::try_new(123400, 5)`    |      `1.23400` |
+| `.1234`    | `Decimal::try_new(12340, 5)`     |      `0.12340` |
+| `.01234`   | `Decimal::try_new(1234, 5)`      |      `0.01234` |
 
 But attempting to parse `123.456789` with `scale = 5` will cause the deserializer to panic with the message:
 

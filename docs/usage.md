@@ -6,12 +6,12 @@ For the purposes of instruction, let's say you're working with a custom OData se
 
 |                    |                                                         |
 |--------------------|---------------------------------------------------------|
-| Rust Application   | `zcustom-service-orders`                                
-| OData Service URL  | `https://my-sap-server.my-domain.com/sap/opu/odata/sap` 
-| OData Service Name | `ZCUSTOM_SERVICE_ORDERS_SRV`                            
-| OData Schema Name  | `ZCUSTOM_SERVICE_ORDERS`                                
-| Entity Names       | `SERVICE_ORDERS_BY_FLOC`<br>`SERVICE_ORDERS_BY_DATE`    
-| Entity Type        | `ZServiceOrder`                                         
+| Rust Application   | `zcustom-service-orders`                                |
+| OData Service URL  | `https://my-sap-server.my-domain.com/sap/opu/odata/sap` |
+| OData Service Name | `ZCUSTOM_SERVICE_ORDERS_SRV`                            |
+| OData Schema Name  | `ZCUSTOM_SERVICE_ORDERS`                                |
+| Entity Names       | `SERVICE_ORDERS_BY_FLOC`<br>`SERVICE_ORDERS_BY_DATE`    |
+| Entity Type        | `ZServiceOrder`                                         |
 
 The general approach to consuming such a service is as follows:
 
@@ -19,7 +19,7 @@ The general approach to consuming such a service is as follows:
 1. `cd zcustom-service-orders`
 1. Edit `Cargo.toml` to include at least the following dependencies
 
-   ```rust
+   ```toml
    [build-dependencies]
    parse-sap-odata = { version = "1.4", features = ["parser"]}
 
