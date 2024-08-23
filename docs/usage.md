@@ -28,12 +28,12 @@ The general approach to consuming such a service is as follows:
    chrono = { version = "0.4", features = ["serde"]}
    quick-xml = { version = "0.36", features = ["serialize"] }
    rust_decimal = { version = "1", features = ["serde-with-str"]}
+   serde = { version = "1.0", features = ["derive"] }
    uuid = { version = "1.8", features = ["serde"]}
 
    # Dependencies needed by this app
    parse-sap-odata = "1.4"
    parse-sap-atom-feed = "1.1"
-   serde = { version = "1.0", features = ["derive"] }
    ```
    
 1. `mkdir odata`
