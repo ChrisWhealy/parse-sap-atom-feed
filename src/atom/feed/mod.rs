@@ -1,10 +1,8 @@
 pub mod author;
 pub mod entry;
 
-use crate::{
-    atom::AtomLink,
-    xml::{default_xml_namespace_atom, default_xml_namespace_d, default_xml_namespace_m},
-};
+use super::link::AtomLink;
+use crate::xml::{default_xml_namespace_atom, default_xml_namespace_d, default_xml_namespace_m};
 use author::Author;
 use entry::Entry;
 
