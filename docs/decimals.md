@@ -10,11 +10,9 @@ For example:
 <Property Name="Depth" Type="Edm.Decimal" Precision="13" Scale="3" sap:unicode="false" sap:unit="DimUnit" sap:label="Dimensions"/>
 ```
 
-This declaration says that a field called `Depth` exists that stores a decimal value in 13 digits, that last three of which are to the right of the decimal separator.
+This declaration says that a field called `Depth` exists that stores a decimal value in 13 digits (`Precision="13"`), that last three of which are to the right of the decimal separator (`Scale="3"`).
 
 ### Transforming `Edm.Decimal` to `rust_decimal::Decimal`
-
-An `Edm.Decinmal` field allows you to specify both the maximum number of digits in the decimal number (using the `Precision` attribute), and the number of digits to the right of the decimal separator (using the `Scale` attribute).
 
 In a `rust_decimal::Decimal` value however, the maximum number of digits is hard-coded to 64.  Consequently, when transforming an `Edm.Decimal` value, we can make use of the `Scale` attribute, but the `Precision` attribute has no meaning.
 
@@ -41,7 +39,7 @@ There are several points to notice here:
 
 #### Scale Too Large
 
-If the value of `Scale` is greater than 28, then function `rust_decimal::Decimal::try_new()` will fail.
+If the value of `Scale` is greater than 28, then function `rust_decimal::Decimal::try_new()` used by the custom deserializer will fail.
 
 #### Too Many Fractional Digits
 
@@ -51,10 +49,10 @@ Consider the XML declaration of a `Property` called `Balance`:
 <Property Name="Balance" Type="Edm.Decimal" Precision="16" Scale="5" sap:unicode="false" sap:unit="CurrencyCode" sap:label="Account Balance"/>
 ```
 
-Knowing `Scale` equals `5`, the deserializer will expect a decimal string value containing up to 5 fractional digits.
-For example, all of these values will be parsed successfully:
+Knowing that the `Precision` value has no meaning and that `Scale` equals `5`, the deserializer will expect a decimal string value containing up to 5 fractional digits.
+For example, all of these string values will be parsed successfully:
 
-| XML String | Rust Declaration                 | `.to_string()` |
+| XML String | Becomes the Rust Declaration     | Is Printed As |
 |------------|----------------------------------|---------------:|
 | `1234`     | `Decimal::try_new(123400000, 5)` |   `1234.00000` |
 | `123.4`    | `Decimal::try_new(12340000, 5)`  |    `123.40000` |
@@ -63,10 +61,10 @@ For example, all of these values will be parsed successfully:
 | `.1234`    | `Decimal::try_new(12340, 5)`     |      `0.12340` |
 | `.01234`   | `Decimal::try_new(1234, 5)`      |      `0.01234` |
 
-But attempting to parse `123.456789` with `scale = 5` will cause the deserializer to panic with the message:
+But attempting to parse a string containing 6 decimal places when `scale = 5` (E.G. `123.456789`) will cause the deserializer to panic with the message:
 
 `Data loss: Edm.Decimal value 123.456789 contains too many fractional digits. Expected 5 but got 6`
 
 However, if any of the excess trailing digits are zeroes, these will first be trimmed before deciding whether or not to panic.
 
-E.G. With `scale = 5`, attempting to deserialize `123.4567800` will succeed because there is no loss of data, but attempting to deserialize `123.456789` will cause a panic.
+E.G. With `scale = 5`, attempting to deserialize `123.4567800` will succeed because trimming the trailing zeroes does not lead to data loss, but attempting to deserialize `123.456789` will cause a panic.
