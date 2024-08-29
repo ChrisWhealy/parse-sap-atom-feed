@@ -7,6 +7,7 @@ static ZEROES: &str = "0000000000000000000000000000";
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 /// Transforming a decimal string value requires the following steps:
+/// 1. If we receive an empty string, return zero immediately
 /// 1. Split the string at the decimal point
 /// 1. Check that the number of digits to the right of the decimal point matches the value of the scale property.
 ///     * If too few, then zero pad
@@ -14,6 +15,10 @@ static ZEROES: &str = "0000000000000000000000000000";
 /// 1. Convert the digits to an i64
 /// 1. Convert the i64 to a Decimal using the appropriate scale value
 fn dec_str_to_rust_decimal(dec_str: String, scale: usize) -> Result<Decimal, String> {
+    if dec_str.is_empty() {
+        return Ok(Decimal::new(0, scale as u32))
+    }
+
     let mut digit_parts = dec_str
         .split(".")
         .map(|s| String::from(s))

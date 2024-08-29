@@ -455,7 +455,7 @@ fn should_parse_decimal_separator_fraction_too_short() -> Result<(), String> {
 }
 
 #[test]
-fn should_parse_decimal_fraction_correct_length() -> Result<(), String> {
+fn should_parse_decimal_separator_fraction_correct_length() -> Result<(), String> {
     let dec_str = "123.45678".to_string();
     let scale: u32 = 5;
     let expected_val = Decimal::try_new(12345678, scale).unwrap().to_string();
@@ -467,10 +467,22 @@ fn should_parse_decimal_fraction_correct_length() -> Result<(), String> {
 }
 
 #[test]
-fn should_parse_decimal_missing_mantissa() -> Result<(), String> {
+fn should_parse_decimal_separator_missing_integer() -> Result<(), String> {
     let dec_str = ".123".to_string();
     let scale: u32 = 5;
     let expected_val = Decimal::try_new(12300, scale).unwrap().to_string();
+
+    match dec_str_to_rust_decimal(dec_str, scale as usize) {
+        Ok(dec_val) => handle_test_comparison(&dec_val.to_string(), &expected_val),
+        Err(err) => Err(err),
+    }
+}
+
+#[test]
+fn should_parse_empty_decimal_string() -> Result<(), String> {
+    let dec_str = "".to_string();
+    let scale: u32 = 3;
+    let expected_val = Decimal::try_new(0, scale).unwrap().to_string();
 
     match dec_str_to_rust_decimal(dec_str, scale as usize) {
         Ok(dec_val) => handle_test_comparison(&dec_val.to_string(), &expected_val),
