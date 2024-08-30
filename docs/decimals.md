@@ -32,21 +32,28 @@ There are several points to notice here:
 1. Since the `<Property>` element does not contain the attribute `Nullable="false"`, the decimal value might be absent; therefore it must be declared inside an `Option`.
 1. The scale of a `rust_decimal::Decimal` value is defined at the time a new value is created.
     Consequently, the field declaration refers to a generic decimal value, without any reference to scale.
-1. Since the `Scale` attribute is part of an `Edm.Decimal` type declaration, this value can only be preserved by implementing a different serializer function for each of the possible scale values.
-    Hence the serializer function name contains both the number of decimal places it will use (`3dp` in this case) and whether the value is wrapped in an `Option`.
+1. Since the `Scale` attribute is part of an `Edm.Decimal` type declaration, this value can only be preserved by implementing a different deserializer function for each of the possible scale values.
+    Hence the deserializer function name contains both the number of decimal places it will use (`3dp` in this case) and whether the value is wrapped in an `Option`.
 
 ### The Custom Deserializer Can Fail and Might Even Panic!
 
+The function `rust_decimal::Decimal::try_new()` creates a new value from two arguments: an `i64` containing the digits and a `scale` value indicating the number of decimal places. 
+The position of the decimal separator is then determined by shifting the integer value right by the number of places defined in the `scale` value.
+
+However, the maximum number of digits than can be represented in an `i164` (19) becomes the upper limit of the value assigned to teh decimal value at the time it is created; irrespective of where the decimal separator is located.
+
 #### Scale Too Large
 
-If the value of `Scale` is greater than 28, then function `rust_decimal::Decimal::try_new()` used by the custom deserializer will fail.
+The internal deserializer function `dec_str_to_rust_decimal` will reject scale values > 28.
 
 #### Too Many Fractional Digits
 
 Consider the XML declaration of a `Property` called `Balance`:
 
 ```xml
-<Property Name="Balance" Type="Edm.Decimal" Precision="16" Scale="5" sap:unicode="false" sap:unit="CurrencyCode" sap:label="Account Balance"/>
+<Property Name="Balance" Type="Edm.Decimal" Precision="16" Scale="5"
+          sap:unicode="false" sap:unit="CurrencyCode" sap:label="Account Balance"
+/>
 ```
 
 Knowing that the `Precision` value has no meaning and that `Scale` equals `5`, the deserializer will expect a decimal string value containing up to 5 fractional digits.
@@ -65,6 +72,6 @@ But attempting to parse a string containing 6 decimal places when `scale = 5` (E
 
 `Data loss: Edm.Decimal value 123.456789 contains too many fractional digits. Expected 5 but got 6`
 
-However, if teh fraction contains trailing zeroes, these will first be trimmed before deciding whether to panic.
+However, if the fraction contains trailing zeroes, these will first be trimmed before deciding whether to panic.
 
 E.G. With `scale = 5`, attempting to deserialize `123.4567800` will succeed because trimming the trailing zeroes does not lead to data loss, but attempting to deserialize `123.456789` will cause a panic.
