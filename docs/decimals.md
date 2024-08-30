@@ -61,10 +61,10 @@ For example, all of these string values will be parsed successfully:
 | `.1234`    | `Decimal::try_new(12340, 5)`     |      `0.12340` |
 | `.01234`   | `Decimal::try_new(1234, 5)`      |      `0.01234` |
 
-But attempting to parse a string containing 6 decimal places when `scale = 5` (E.G. `123.456789`) will cause the deserializer to panic with the message:
+But attempting to parse a string containing 6 decimal places when `scale = 5` (E.G. `123.456789`) will cause data loss and the deserializer will panic with the message:
 
 `Data loss: Edm.Decimal value 123.456789 contains too many fractional digits. Expected 5 but got 6`
 
-However, if any of the excess trailing digits are zeroes, these will first be trimmed before deciding whether or not to panic.
+However, if teh fraction contains trailing zeroes, these will first be trimmed before deciding whether to panic.
 
 E.G. With `scale = 5`, attempting to deserialize `123.4567800` will succeed because trimming the trailing zeroes does not lead to data loss, but attempting to deserialize `123.456789` will cause a panic.

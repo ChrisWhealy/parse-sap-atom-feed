@@ -2,57 +2,98 @@ use rust_decimal::Decimal;
 use serde::{de::Error, Deserialize, Deserializer};
 use std::str::FromStr;
 
-// Maximum potential padding is 28 zeroes
-static ZEROES: &str = "0000000000000000000000000000";
+// i64::MAX is 19 digits long
+static MAX_DIGITS: usize = 19;
+// Value duplicated from rust_decimal::constants::MAX_PRECISION which is private...
+const MAX_PRECISION: usize = 28;
+// Maximum potential padding is 27 zeroes for 0.0000000000000000000000000001
+static ZEROES: &str = "000000000000000000000000000";
 
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-/// Transforming a decimal string value requires the following steps:
-/// 1. If we receive an empty string, return zero immediately
-/// 1. Split the string at the decimal point
-/// 1. Check that the number of digits to the right of the decimal point matches the value of the scale property.
-///     * If too few, then zero pad
-///     * If too many, then there's something badly wrong with the data coming out of the OData system. Panic to avoid data loss
-/// 1. Convert the digits to an i64
-/// 1. Convert the i64 to a Decimal using the appropriate scale value
-fn dec_str_to_rust_decimal(dec_str: String, scale: usize) -> Result<Decimal, String> {
-    if dec_str.is_empty() {
-        return Ok(Decimal::new(0, scale as u32))
-    }
-
-    let mut digit_parts = dec_str
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+/// Parse the digits in the decimal string and return an i64 suitable for creating a new rust_decimal::Decimal value
+///
+/// * Split integer and fractional parts
+/// * Trim trailing zeroes from fractional part before deciding if it's too long
+/// * Check the number of fractional digits <= scale
+/// * Concatenate integer with zero padded fraction (on the right) then strip leading zeroes
+/// * Check the number digits <= MAX_DIGITS
+/// * Convert digits to i64
+fn parse_decimal_digits(dec_str: &str, scale: usize) -> Result<i64, String> {
+    // Just in case it goes horribly wrong...
+    let data_loss_prefix = format!(
+        "'{}' cannot be converted to rust_decimal::Decimal without loss of data:",
+        dec_str,
+    );
+    // Split string at decimal point (that might not be there)
+    let num_parts = dec_str
         .split(".")
         .map(|s| String::from(s))
         .collect::<Vec<String>>();
 
-    // The decimal point might not be present in the string E.G. "123"
-    if digit_parts.len() == 1 {
-        // Fill in the missing decimal digits
-        digit_parts.push(format!("{ZEROES:.*}", scale));
-    } else if digit_parts.len() == 2 {
-        // Do the decimal place digits need zero padding on the right?
-        if digit_parts[1].len() < scale {
-            digit_parts[1] = format!("{:0<scale$}", digit_parts[1]);
-        } else if digit_parts[1].len() > scale {
-            // Before panicking, first remove any trailing zeroes as this does not constitute data loss
-            let trimmed_fraction = digit_parts[1].trim_end_matches("0");
+    let integers = num_parts[0].as_str();
+    let fraction = if num_parts.len() == 2 {
+        // Trailing zeroes in the fraction are not needed at this point in time
+        // However, some trailing zeroes might need to be reinstated before converting to i64
+        num_parts[1].trim_end_matches("0")
+    } else {
+        // Fill the missing fractional zeroes
+        &format!("{ZEROES:.*}", scale)
+    };
 
-            if trimmed_fraction.len() > scale {
-                // Well this is bad... Something seems to have gone wrong in the OData service as it is outputting more
-                // decimal digits have been defined by the metadata type definition's scale attribute.
-                // Have to panic here to avoid data loss...
-                panic!(
-                    "Data loss: Edm.Decimal value {} contains too many fractional digits. Expected {} but got {}",
-                    dec_str, scale, digit_parts[1].len()
-                );
-            } else {
-                digit_parts[1] = trimmed_fraction.to_string();
-            }
-        }
+    // Return an error if there are more fractional digits than are permitted by the scale
+    if fraction.len() > scale {
+        return Err(format!(
+            "{} {} fractional digit{} supplied, but scale only permits {}",
+            data_loss_prefix,
+            fraction.len(),
+            if fraction.len() > 1 { "s" } else { "" },
+            scale
+        ));
     }
 
-    let digits = digit_parts.join("");
-    let i64_digits = i64::from_str(&digits).or_else(|err| Err(err.to_string()))?;
-    Decimal::try_new(i64_digits, scale as u32).or_else(|err| Err(err.to_string()))
+    // Zero pad any missing fractional zeroes on the right, combine parts then strip leading zeroes
+    let digits = format!("{integers}{:0<scale$}", fraction);
+    let digits = digits.trim_start_matches("0");
+    let digit_count = digits.len();
+
+    // Can this number be converted to an i64?
+    if digit_count > MAX_DIGITS {
+        Err(format!(
+            "{} Too many digits ({}) to fit in an i64 ({})",
+            data_loss_prefix, digit_count, MAX_DIGITS
+        ))
+    } else {
+        Ok(i64::from_str(&format!("{digits}")).unwrap())
+    }
+}
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+/// String -> rust_decimal::Decimal parser
+fn dec_str_to_rust_decimal(dec_str: String, scale: usize) -> Result<Decimal, String> {
+    if scale > MAX_PRECISION {
+        return Err(format!(
+            "Scale exceeds the maximum precision allowed: {} > {}",
+            scale, MAX_PRECISION
+        ));
+    }
+
+    // Check for cases that always return zero
+    if dec_str.is_empty()
+        || dec_str.eq("0")
+        || dec_str.eq("0.0")
+        || dec_str.eq("0.")
+        || dec_str.eq(".0")
+    {
+        return Ok(Decimal::new(0, scale as u32));
+    }
+
+    // If parse_decimal_digits returns an error, then data loss has been detected - throw toys out of pram
+    let digits_i64 = match parse_decimal_digits(&dec_str, scale) {
+        Ok(digits) => digits,
+        Err(err) => panic!("{}", err),
+    };
+
+    Decimal::try_new(digits_i64, scale as u32).or_else(|err| Err(err.to_string()))
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -68,7 +109,7 @@ where
     }
 }
 
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 pub fn to_rust_decimal_0dp_opt<'de, D>(deserializer: D) -> Result<Option<Decimal>, D::Error>
 where
     D: Deserializer<'de>,
@@ -244,7 +285,7 @@ where
     Ok(to_rust_decimal_28dp(deserializer).ok())
 }
 
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 pub fn to_rust_decimal_0dp<'de, D>(deserializer: D) -> Result<Decimal, D::Error>
 where
     D: Deserializer<'de>,
@@ -420,6 +461,8 @@ where
     to_rust_decimal_inner(deserializer, 28)
 }
 
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #[cfg(test)]
-pub mod unit_tests;
+mod parser_tests;
+#[cfg(test)]
+mod unit_tests;
