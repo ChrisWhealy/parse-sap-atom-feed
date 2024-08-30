@@ -7,7 +7,8 @@ When parsing the XML metadata of an SAP V2 OData service, the code in crate `par
 For example:
 
 ```xml
-<Property Name="Depth" Type="Edm.Decimal" Precision="13" Scale="3" sap:unicode="false" sap:unit="DimUnit" sap:label="Dimensions"/>
+<Property Name="Depth" Type="Edm.Decimal" Precision="13" Scale="3"
+          sap:unicode="false" sap:unit="DimUnit" sap:label="Dimensions"/>
 ```
 
 This declaration says that a field called `Depth` exists that stores a decimal value in 13 digits (`Precision="13"`), that last three of which are to the right of the decimal separator (`Scale="3"`).
@@ -37,10 +38,11 @@ There are several points to notice here:
 
 ### The Custom Deserializer Can Fail and Might Even Panic!
 
-The function `rust_decimal::Decimal::try_new()` creates a new value from two arguments: an `i64` containing the digits and a `scale` value indicating the number of decimal places. 
+The function `rust_decimal::Decimal::try_new()` attempts to create a new value from two arguments: an `i64` containing the digits and a `scale` value indicating the number of decimal places. 
 The position of the decimal separator is then determined by shifting the integer value right by the number of places defined in the `scale` value.
 
-However, the maximum number of digits than can be represented in an `i164` (19) becomes the upper limit of the value assigned to teh decimal value at the time it is created; irrespective of where the decimal separator is located.
+However, the maximum number of digits than can be represented in an `i164` is 19.
+So this defines the maximum size of the value that can be assigned to a decimal value when it is created; irrespective of where the decimal separator will be located.
 
 #### Scale Too Large
 
@@ -60,17 +62,17 @@ Knowing that the `Precision` value has no meaning and that `Scale` equals `5`, t
 For example, all of these string values will be parsed successfully:
 
 | XML String | Becomes the Rust Declaration     | Is Printed As |
-|------------|----------------------------------|---------------:|
-| `1234`     | `Decimal::try_new(123400000, 5)` |   `1234.00000` |
-| `123.4`    | `Decimal::try_new(12340000, 5)`  |    `123.40000` |
-| `12.34`    | `Decimal::try_new(1234000, 5)`   |     `12.34000` |
-| `1.234`    | `Decimal::try_new(123400, 5)`    |      `1.23400` |
-| `.1234`    | `Decimal::try_new(12340, 5)`     |      `0.12340` |
-| `.01234`   | `Decimal::try_new(1234, 5)`      |      `0.01234` |
+|------------|----------------------------------|--------------:|
+| `"1234"`   | `Decimal::try_new(123400000, 5)` |  `1234.00000` |
+| `"123.4"`  | `Decimal::try_new(12340000, 5)`  |   `123.40000` |
+| `"12.34"`  | `Decimal::try_new(1234000, 5)`   |    `12.34000` |
+| `"1.234"`  | `Decimal::try_new(123400, 5)`    |     `1.23400` |
+| `".1234"`  | `Decimal::try_new(12340, 5)`     |     `0.12340` |
+| `".01234"` | `Decimal::try_new(1234, 5)`      |     `0.01234` |
 
 But attempting to parse a string containing 6 decimal places when `scale = 5` (E.G. `123.456789`) will cause data loss and the deserializer will panic with the message:
 
-`Data loss: Edm.Decimal value 123.456789 contains too many fractional digits. Expected 5 but got 6`
+`Error: '123.456789' cannot be converted to rust_decimal::Decimal without loss of data: 6 fractional digits supplied, but scale only permits 5`
 
 However, if the fraction contains trailing zeroes, these will first be trimmed before deciding whether to panic.
 

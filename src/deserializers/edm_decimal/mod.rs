@@ -21,7 +21,7 @@ static ZEROES: &str = "000000000000000000000000000";
 fn parse_decimal_digits(dec_str: &str, scale: usize) -> Result<i64, String> {
     // Just in case it goes horribly wrong...
     let data_loss_prefix = format!(
-        "'{}' cannot be converted to rust_decimal::Decimal without loss of data:",
+        "Error: '{}' cannot be converted to rust_decimal::Decimal without loss of data:",
         dec_str,
     );
     // Split string at decimal point (that might not be there)
