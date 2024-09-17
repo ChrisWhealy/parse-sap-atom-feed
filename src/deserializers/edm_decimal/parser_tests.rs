@@ -3,6 +3,18 @@ use crate::test_utils::*;
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #[test]
+fn should_parse_zero() -> Result<(), String> {
+    handle_test_comparison(&parse_decimal_digits("0", 0)?, &0i64)
+}
+#[test]
+fn should_parse_zero_1dp() -> Result<(), String> {
+    handle_test_comparison(&parse_decimal_digits("0.0", 1)?, &0i64)
+}
+#[test]
+fn should_parse_zero_3dp() -> Result<(), String> {
+    handle_test_comparison(&parse_decimal_digits("0.000", 3)?, &0i64)
+}
+#[test]
 fn should_parse_missing_integer() -> Result<(), String> {
     handle_test_comparison(&parse_decimal_digits(".0025", 4)?, &25i64)
 }

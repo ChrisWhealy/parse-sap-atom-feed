@@ -57,7 +57,9 @@ fn parse_decimal_digits(dec_str: &str, scale: usize) -> Result<i64, String> {
     let digit_count = digits.len();
 
     // Can this number be converted to an i64?
-    if digit_count > MAX_DIGITS {
+    if digit_count == 0 {
+        Ok(0)
+    } else if digit_count > MAX_DIGITS {
         Err(format!(
             "{} Too many digits ({}) to fit in an i64 ({})",
             data_loss_prefix, digit_count, MAX_DIGITS
