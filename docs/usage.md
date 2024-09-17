@@ -58,7 +58,7 @@ The general approach to consuming such a service is as follows:
    use parse_sap_atom_feed::{atom::feed::Feed, odata_error::ODataError, xml::sanitise_xml};
    use std::str::{self, FromStr};
 
-   include!(concat!(env!("OUT_DIR"), "/zcustom_service_orders.rs"));
+   parse_sap_odata::include_mod!("zcustom_service_orders");
 
    use zcustom_service_orders::*;
 
