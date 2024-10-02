@@ -89,5 +89,5 @@ But attempting to parse a string containing 6 decimal places when `scale = 5` (E
 
 However, if the fraction contains trailing zeroes, these will first be trimmed before deciding whether to panic.
 
-E.G. With `scale = 5`, attempting to deserialize `123.4567800` will succeed because after the trailing zeroes have been trimmed, conversion to decimal does not result in ant data loss.
+E.G. With `scale = 5`, attempting to deserialize `123.4567800` will succeed because after the trailing zeroes have been trimmed, conversion to decimal does not cause data loss.
 However, attempting to deserialize `123.456789` will cause a panic because 6 decimal places have been supplied.
