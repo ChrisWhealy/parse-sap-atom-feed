@@ -7,8 +7,15 @@ When parsing the XML metadata of an SAP V2 OData service, the code in crate `par
 For example:
 
 ```xml
-<Property Name="Depth" Type="Edm.Decimal" Precision="13" Scale="3"
-          sap:unicode="false" sap:unit="DimUnit" sap:label="Dimensions"/>
+<Property 
+    Name="Depth"
+    Type="Edm.Decimal"
+    Precision="13"
+    Scale="3"
+    sap:unicode="false"
+    sap:unit="DimUnit"
+    sap:label="Dimensions"
+/>
 ```
 
 This declaration says that a field called `Depth` exists that stores a decimal value in 13 digits (`Precision="13"`), that last three of which are to the right of the decimal separator (`Scale="3"`).
@@ -38,11 +45,11 @@ There are several points to notice here:
 
 ### The Custom Deserializer Can Fail and Might Even Panic!
 
-The function `rust_decimal::Decimal::try_new()` attempts to create a new value from two arguments: an `i64` containing the digits and a `scale` value indicating the number of decimal places. 
+The function `rust_decimal::Decimal::try_new()` attempts to create a new decimal value from two arguments: an `i64` containing the digits and a `scale` value indicating the number of decimal places. 
 The position of the decimal separator is then determined by shifting the integer value right by the number of places defined in the `scale` value.
 
-However, the maximum number of digits than can be represented in an `i164` is 19.
-So this defines the maximum size of the value that can be assigned to a decimal value when it is created; irrespective of where the decimal separator will be located.
+However, the maximum number of digits that an `i164` can hold is 19.
+Therefore, irrespective of where the decimal separator should be located, the initial value of a decimal number cannot be longer than 19 digits.
 
 #### Scale Too Large
 
@@ -53,8 +60,14 @@ The internal deserializer function `dec_str_to_rust_decimal` will reject scale v
 Consider the XML declaration of a `Property` called `Balance`:
 
 ```xml
-<Property Name="Balance" Type="Edm.Decimal" Precision="16" Scale="5"
-          sap:unicode="false" sap:unit="CurrencyCode" sap:label="Account Balance"
+<Property
+    Name="Balance"
+    Type="Edm.Decimal"
+    Precision="16"
+    Scale="5"
+    sap:unicode="false"
+    sap:unit="CurrencyCode"
+    sap:label="Account Balance"
 />
 ```
 
@@ -76,4 +89,5 @@ But attempting to parse a string containing 6 decimal places when `scale = 5` (E
 
 However, if the fraction contains trailing zeroes, these will first be trimmed before deciding whether to panic.
 
-E.G. With `scale = 5`, attempting to deserialize `123.4567800` will succeed because trimming the trailing zeroes does not lead to data loss, but attempting to deserialize `123.456789` will cause a panic.
+E.G. With `scale = 5`, attempting to deserialize `123.4567800` will succeed because after the trailing zeroes have been trimmed, conversion to decimal does not result in ant data loss.
+However, attempting to deserialize `123.456789` will cause a panic because 6 decimal places have been supplied.
