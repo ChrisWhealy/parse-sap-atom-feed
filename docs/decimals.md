@@ -48,7 +48,7 @@ There are several points to notice here:
 The function `rust_decimal::Decimal::try_new()` attempts to create a new decimal value from two arguments: an `i64` containing the digits and a `scale` value indicating the number of decimal places. 
 The position of the decimal separator is then determined by shifting the integer value right by the number of places defined in the `scale` value.
 
-However, the maximum number of digits that an `i164` can hold is 19.
+However, the maximum number of digits that an `i64` can hold is 19.
 Therefore, irrespective of where the decimal separator should be located, the initial value of a decimal number cannot be longer than 19 digits.
 
 #### Scale Too Large
