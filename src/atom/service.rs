@@ -26,7 +26,7 @@ pub struct AtomService {
     pub namespace_sap: String,
     #[serde(rename = "@lang", default = "default_xml_language")]
     pub language: String,
-    #[serde(rename = "@base")]
+    #[serde(rename = "@xml:base")]
     pub base_url: String,
     pub workspace: AtomWorkspace,
     #[serde(rename = "link")]

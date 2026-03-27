@@ -1,7 +1,5 @@
 <entry>
-    <id>
-        https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/ServiceCollection('ZSEPMRA_GR_POST_0001')
-    </id>
+    <id>https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/ServiceCollection('ZSEPMRA_GR_POST_0001')</id>
     <title type="text">ServiceCollection('ZSEPMRA_GR_POST_0001')</title>
     <updated>2024-06-18T11:29:35Z</updated>
     <category term="catalogservice.Service" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>

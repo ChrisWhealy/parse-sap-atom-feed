@@ -37,10 +37,10 @@ pub fn should_parse_atom_entry() -> Result<(), String> {
             let collection = "ServiceCollection('ZSEPMRA_GR_POST_0001')".to_string();
             let entry = Entry::<DummyService>::from_str(&xml).unwrap();
 
-            handle_test_comparison(&entry.id, &format!("{}{}", url, collection))?;
+            handle_test_comparison(&entry.id, &format!("{url}{collection}"))?;
             handle_test_comparison(&entry.title, &collection)?;
             handle_test_comparison(&entry.updated, &"2024-06-18T11:29:35Z".to_string())?;
-            handle_test_comparison(&entry.links.len(), &(4usize))?;
+            handle_test_comparison(&entry.links.len(), &(4_usize))?;
             handle_test_bool(!entry.category.fixed)?;
             handle_test_comparison_opt(&entry.category.label, &None)?;
             handle_test_comparison(&entry.category.scheme, &default_xml_data_services_scheme())?;

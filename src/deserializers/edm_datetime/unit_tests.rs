@@ -1,5 +1,6 @@
 use super::{to_naive_date_time, to_naive_date_time_opt};
 use crate::test_utils::*;
+use std::fmt::{Display, Formatter};
 
 use serde::Deserialize;
 use std::str::FromStr;
@@ -11,6 +12,12 @@ use std::str::FromStr;
 struct DateElement {
     #[serde(deserialize_with = "to_naive_date_time")]
     created_at: chrono::NaiveDateTime,
+}
+
+impl Display for DateElement {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{:?}", self.created_at)
+    }
 }
 
 impl FromStr for DateElement {
@@ -46,7 +53,7 @@ fn should_deserialize_naive_date_time() -> Result<(), String> {
 
     match DateElement::from_str(created_at_xml) {
         Ok(result) => handle_test_comparison(&created_at, &result.created_at),
-        Err(err) => Err(format!("{err}")),
+        Err(err) => Err(err.to_string()),
     }
 }
 
@@ -59,7 +66,7 @@ fn should_deserialize_optional_naive_date_time() -> Result<(), String> {
 
     match OptionalDateElement::from_str(created_at_xml) {
         Ok(result) => handle_test_comparison_opt(&result.created_at, &Some(created_at)),
-        Err(err) => Err(format!("{err}")),
+        Err(err) => Err(err.to_string()),
     }
 }
 
@@ -70,6 +77,28 @@ fn should_deserialize_empty_optional_naive_date_time() -> Result<(), String> {
 
     match OptionalDateElement::from_str(created_at_xml) {
         Ok(result) => handle_test_comparison_opt(&result.created_at, &None),
-        Err(err) => Err(format!("{err}")),
+        Err(err) => Err(err.to_string()),
+    }
+}
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#[test]
+fn should_not_deserialize_empty_naive_date_time() -> Result<(), String> {
+    let expected_error = "premature end of input";
+    let created_at_xml = "<Test><d:CreatedAt /></Test>";
+
+    match DateElement::from_str(created_at_xml) {
+        Ok(result) => Err(format!("Expected parse failure, but got {result}")),
+        Err(err) => {
+            if err.to_string().eq(expected_error) {
+                Ok(())
+            } else {
+                Err(format!(
+                    "Expected '{}', but got '{}'",
+                    expected_error,
+                    err.to_string()
+                ))
+            }
+        }
     }
 }

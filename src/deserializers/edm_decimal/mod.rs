@@ -13,16 +13,15 @@ static ZEROES: &str = "000000000000000000000000000";
 /// Parse the digits in the decimal string and return an i64 suitable for creating a new rust_decimal::Decimal value
 ///
 /// * Split integer and fractional parts
-/// * Trim trailing zeroes from fractional part before deciding if it's too long
-/// * Check the number of fractional digits <= scale
+/// * Trim trailing zeroes from fractional part
+/// * Decide if fractional part is too long (fractional digits <= scale)
 /// * Concatenate integer with zero padded fraction (on the right) then strip leading zeroes
 /// * Check the number digits <= MAX_DIGITS
 /// * Convert digits to i64
 fn parse_decimal_digits(dec_str: &str, scale: usize) -> Result<i64, String> {
     // Just in case it goes horribly wrong...
     let data_loss_prefix = format!(
-        "Error: '{}' cannot be converted to rust_decimal::Decimal without loss of data:",
-        dec_str,
+        "Error: '{dec_str}' cannot be converted to rust_decimal::Decimal without loss of data:",
     );
     // Split string at decimal point (that might not be there)
     let num_parts = dec_str
@@ -43,11 +42,9 @@ fn parse_decimal_digits(dec_str: &str, scale: usize) -> Result<i64, String> {
     // Return an error if there are more fractional digits than are permitted by the scale
     if fraction.len() > scale {
         return Err(format!(
-            "{} {} fractional digit{} supplied, but scale only permits {}",
-            data_loss_prefix,
+            "{data_loss_prefix} {} fractional digit{} supplied, but scale only permits {scale}",
             fraction.len(),
             if fraction.len() > 1 { "s" } else { "" },
-            scale
         ));
     }
 
@@ -61,8 +58,7 @@ fn parse_decimal_digits(dec_str: &str, scale: usize) -> Result<i64, String> {
         Ok(0)
     } else if digit_count > MAX_DIGITS {
         Err(format!(
-            "{} Too many digits ({}) to fit in an i64 ({})",
-            data_loss_prefix, digit_count, MAX_DIGITS
+            "{data_loss_prefix} Too many digits ({digit_count}) to fit in an i64 ({MAX_DIGITS})"
         ))
     } else {
         Ok(i64::from_str(&format!("{digits}")).unwrap())
@@ -74,8 +70,7 @@ fn parse_decimal_digits(dec_str: &str, scale: usize) -> Result<i64, String> {
 fn dec_str_to_rust_decimal(dec_str: String, scale: usize) -> Result<Decimal, String> {
     if scale > MAX_PRECISION {
         return Err(format!(
-            "Scale exceeds the maximum precision allowed: {} > {}",
-            scale, MAX_PRECISION
+            "Scale exceeds the maximum precision allowed: {scale} > {MAX_PRECISION}"
         ));
     }
 

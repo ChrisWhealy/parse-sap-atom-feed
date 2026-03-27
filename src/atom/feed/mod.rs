@@ -31,7 +31,7 @@ pub struct Feed<T> {
     pub namespace_d: String,
 
     // Appears in the XML as the `feed` attribute `xmlns:base`
-    #[serde(rename = "@base")]
+    #[serde(rename = "@xml:base")]
     pub xml_base: Option<String>,
 
     pub id: String,
