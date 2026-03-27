@@ -182,175 +182,175 @@ struct DecimalElement28 {
 }
 
 impl FromStr for DecimalElement00 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for DecimalElement01 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for DecimalElement02 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for DecimalElement03 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for DecimalElement04 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for DecimalElement05 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for DecimalElement06 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for DecimalElement07 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for DecimalElement08 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for DecimalElement09 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for DecimalElement10 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for DecimalElement11 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for DecimalElement12 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for DecimalElement13 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for DecimalElement14 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for DecimalElement15 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for DecimalElement16 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for DecimalElement17 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for DecimalElement18 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for DecimalElement19 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for DecimalElement20 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for DecimalElement21 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for DecimalElement22 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for DecimalElement23 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for DecimalElement24 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for DecimalElement25 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for DecimalElement26 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for DecimalElement27 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for DecimalElement28 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
@@ -533,175 +533,175 @@ struct OptionalDecimalElement28 {
 }
 
 impl FromStr for OptionalDecimalElement00 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for OptionalDecimalElement01 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for OptionalDecimalElement02 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for OptionalDecimalElement03 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for OptionalDecimalElement04 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for OptionalDecimalElement05 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for OptionalDecimalElement06 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for OptionalDecimalElement07 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for OptionalDecimalElement08 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for OptionalDecimalElement09 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for OptionalDecimalElement10 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for OptionalDecimalElement11 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for OptionalDecimalElement12 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for OptionalDecimalElement13 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for OptionalDecimalElement14 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for OptionalDecimalElement15 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for OptionalDecimalElement16 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for OptionalDecimalElement17 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for OptionalDecimalElement18 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for OptionalDecimalElement19 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for OptionalDecimalElement20 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for OptionalDecimalElement21 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for OptionalDecimalElement22 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for OptionalDecimalElement23 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for OptionalDecimalElement24 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for OptionalDecimalElement25 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for OptionalDecimalElement26 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for OptionalDecimalElement27 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }
 }
 impl FromStr for OptionalDecimalElement28 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
     }

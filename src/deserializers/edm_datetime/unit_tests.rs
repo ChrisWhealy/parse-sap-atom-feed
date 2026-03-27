@@ -21,7 +21,7 @@ impl Display for DateElement {
 }
 
 impl FromStr for DateElement {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
@@ -37,7 +37,7 @@ struct OptionalDateElement {
 }
 
 impl FromStr for OptionalDateElement {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)

@@ -50,7 +50,7 @@ impl<T> std::str::FromStr for Feed<T>
 where
     T: DeserializeOwned,
 {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)

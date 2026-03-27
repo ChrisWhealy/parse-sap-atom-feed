@@ -23,7 +23,7 @@ pub struct AtomLink {
 }
 
 impl std::str::FromStr for AtomLink {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)

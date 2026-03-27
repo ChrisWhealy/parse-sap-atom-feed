@@ -16,7 +16,7 @@ use crate::{test_utils::*, xml::default_xml_data_services_scheme};
 pub struct DummyService {}
 
 impl FromStr for DummyService {
-    type Err = quick_xml::DeError;
+    type Err = quick_xml::de::DeError;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         quick_xml::de::from_str(s)
