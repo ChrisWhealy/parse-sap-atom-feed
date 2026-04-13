@@ -8,12 +8,11 @@ use serde::{Deserialize, Serialize};
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 /// Represents an Atom service document `<app:service>`
 ///
-/// ***WARNING:***<br>`quick-xml` strips namespace identifiers from XML tag names, and from certain attribute names!
+/// ***WARNING:***<br>`quick-xml` 0.39 strips certain namespace identifiers from XML element names, but preserves
+/// namespaces in attribute names!
 ///
-/// Tag names such as `<app:service>` and `<atom:title>` will appear simply as `<service>` and `<title>`.
-///
-/// Attribute names prefixed with `xml` such as `xml:lang` or `xml:base` will be modified to `lang` and `base`, but
-/// `xmlns:app` or `xmlns:atom` will appear without modification
+/// Element names such as `<app:service>` and `<atom:title>` will appear simply as `<service>` and `<title>`.
+/// Element attribute names such as `xml:lang` or `xml:base` are deserialized to `@xml:base`.
 #[derive(Debug, Serialize, Deserialize)]
 pub struct AtomService {
     #[serde(rename = "@xmlns:app", default = "default_xml_namespace_app")]
@@ -29,7 +28,7 @@ pub struct AtomService {
     #[serde(rename = "@xml:base")]
     pub base_url: String,
     pub workspace: AtomWorkspace,
-    #[serde(rename = "link")]
+    #[serde(rename = "link", default)]
     pub links: Vec<AtomLink>,
 }
 

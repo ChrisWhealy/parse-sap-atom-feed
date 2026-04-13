@@ -72,9 +72,9 @@ pub fn should_parse_atom_workspace() -> Result<(), String> {
                 &atom_ws.collections[0].title,
                 &"BusinessPartnerSet".to_string(),
             )?;
-            handle_test_comparison(
+            handle_test_comparison_opt(
                 &atom_ws.collections[0].member_title,
-                &"BusinessPartner".to_string(),
+                &Some("BusinessPartner".to_string()),
             )?;
             handle_test_bool(!atom_ws.collections[5].is_creatable)?;
             handle_test_bool(!atom_ws.collections[5].is_updatable)?;
@@ -84,7 +84,7 @@ pub fn should_parse_atom_workspace() -> Result<(), String> {
             handle_test_comparison(&atom_ws.collections[5].content_version, &"1".to_string())?;
             handle_test_comparison(&atom_ws.collections[5].href, &"VH_SexSet".to_string())?;
             handle_test_comparison(&atom_ws.collections[5].title, &"VH_SexSet".to_string())?;
-            handle_test_comparison(&atom_ws.collections[5].member_title, &"VH_Sex".to_string())
+            handle_test_comparison_opt(&atom_ws.collections[5].member_title, &Some("VH_Sex".to_string()))
         }
         Err(err) => Err(format!("XML test data was not in UTF8 format: {err}")),
     }

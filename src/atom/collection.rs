@@ -49,8 +49,8 @@ pub struct AtomCollection {
     #[serde(rename = "@href")]
     pub href: String,
     pub title: String,
-    #[serde(rename = "member-title")]
-    pub member_title: String,
+    #[serde(rename = "member-title", default)]
+    pub member_title: Option<String>,
     pub link: Option<AtomLink>,
 }
 
